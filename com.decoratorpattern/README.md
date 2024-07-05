@@ -52,3 +52,70 @@ public class PlainCoffee implements Coffee {
     }
 }
 ```
+
+## Decorator(CoffeeDecorator)
+CoffeeDecorator is an abstract class implementing the Coffee interface.
+It maintains a reference to the decorated Coffee object.
+The `getDescription()` and `getCost()` methods are implemented to delegate to the decorated coffee object.
+
+```java
+// CoffeeDecorator.java
+public abstract class CoffeeDecorator implements Coffee {
+    protected Coffee decoratedCoffee;
+
+    public CoffeeDecorator(Coffee decoratedCoffee) {
+        this.decoratedCoffee = decoratedCoffee;
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost();
+    }
+}
+```
+
+### ConcreteDecorators(MilkDecorator,SugarDecorator)
+MilkDecorator and SugarDecorator are concrete decorators extending CoffeeDecorator.
+They override `getDescription()` to add the respective decorator description to the decorated coffee’s description.
+They override `getCost()` to add the cost of the respective decorator to the decorated coffee’s cost.
+
+```java
+// MilkDecorator.java
+public class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee decoratedCoffee) {
+        super(decoratedCoffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription() + ", Milk";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost() + 0.5;
+    }
+}
+
+// SugarDecorator.java
+public class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee decoratedCoffee) {
+        super(decoratedCoffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription() + ", Sugar";
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost() + 0.2;
+    }
+}
+```
