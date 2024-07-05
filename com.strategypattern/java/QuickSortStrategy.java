@@ -1,4 +1,4 @@
-package StrategyPattern.java;
+package com.strategypattern.java;
 
 // QuickSortStrategy
 public class QuickSortStrategy implements SortingStrategy {

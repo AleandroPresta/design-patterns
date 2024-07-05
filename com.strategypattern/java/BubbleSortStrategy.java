@@ -1,4 +1,4 @@
-package StrategyPattern.java;
+package com.strategypattern.java;
 
 // BubbleSortStrategy
 public class BubbleSortStrategy implements SortingStrategy {

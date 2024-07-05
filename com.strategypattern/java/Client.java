@@ -1,4 +1,4 @@
-package StrategyPattern.java;
+package com.strategypattern.java;
 
 import java.util.Arrays;
 

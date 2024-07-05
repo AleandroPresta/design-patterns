@@ -1,4 +1,4 @@
-package StrategyPattern.java;
+package com.strategypattern.java;
 
 // MergeSortStrategy
 public class MergeSortStrategy implements SortingStrategy {
