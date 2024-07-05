@@ -1,6 +1,25 @@
 # Strategy Design Pattern
 The Strategy Design Pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable, allowing clients to switch algorithms dynamically without altering the code structure.
 
+## Table of Contents
+- [Characteristics of the Strategy Design Pattern](#characteristics-of-the-strategy-design-pattern)
+- [Components of the Strategy Design Pattern](#components-of-the-strategy-design-pattern)
+  - [Context](#context)
+  - [Strategy Interface](#strategy-interface)
+  - [Concrete Strategies](#concrete-strategies)
+  - [Client](#client)
+- [Communication between the Components](#communication-between-the-components)
+  - [Client to Context](#client-to-context)
+  - [Context to Strategy](#context-to-strategy)
+  - [Strategy to Context](#strategy-to-context)
+  - [Strategy Interface as Contract](#strategy-interface-as-contract)
+  - [Decoupled Communication](#decoupled-communication)
+- [Implementation](#implementation)
+  - [SortingContext](#sortingcontext)
+  - [SortingStrategy (Interface)](#sortingstrategy-interface)
+  - [Concrete Strategies](#concrete-strategies-1)
+
+
 ## Characteristics of the Strategy Design Pattern
 The Strategy Design Pattern exhibits several key characteristics that make it distinctive and effective for managing algorithm variations in software systems:
 
