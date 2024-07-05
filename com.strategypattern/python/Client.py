@@ -1,7 +1,7 @@
-from sorting_context import SortingContext
-from bubble_sort_strategy import BubbleSortStrategy
-from merge_sort_strategy import MergeSortStrategy
-from quick_sort_strategy import QuickSortStrategy
+from SortingContext import SortingContext
+from BubbleSortStrategy import BubbleSortStrategy
+from MergeSortStrategy import MergeSortStrategy
+from QuickSortStrategy import QuickSortStrategy
 
 class Client:
     def main() -> None:

@@ -1,4 +1,4 @@
-from sorting_strategy import SortingStrategy
+from SortingStrategy import SortingStrategy
 
 class MergeSortStrategy(SortingStrategy):
 	def sort(self, data: list) -> list:
