@@ -3,9 +3,9 @@ Design patterns are standardized solutions to common problems encountered in sof
 
 ## Table of Content
 <ul>
-    <li><a hred="./Strategy Pattern/">Strategy Pattern</a></li>
-    <li><a hred="#">DecoratorPattern</a></li>
-    <li><a hred="#">Facade Pattern</a></li>
-    <li><a hred="#">Observer Pattern</a></li>
-    <li><a hred="#">Singleton Pattern</a></li>
+    <li><a href="./Strategy Pattern/">Strategy Pattern</a></li>
+    <li><a href="#">DecoratorPattern</a></li>
+    <li><a href="#">Facade Pattern</a></li>
+    <li><a href="#">Observer Pattern</a></li>
+    <li><a href="#">Singleton Pattern</a></li>
 </ul>
