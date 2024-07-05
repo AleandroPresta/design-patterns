@@ -1,3 +1,5 @@
+package StrategyPattern.java;
+
 // MergeSortStrategy
 public class MergeSortStrategy implements SortingStrategy {
     @Override

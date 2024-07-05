@@ -1,3 +1,5 @@
+package StrategyPattern.java;
+
 // BubbleSortStrategy
 public class BubbleSortStrategy implements SortingStrategy {
     @Override

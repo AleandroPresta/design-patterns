@@ -1,3 +1,5 @@
+package StrategyPattern.java;
+
 import java.util.Arrays;
 
 public class Client {

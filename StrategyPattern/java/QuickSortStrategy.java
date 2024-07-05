@@ -1,3 +1,5 @@
+package StrategyPattern.java;
+
 // QuickSortStrategy
 public class QuickSortStrategy implements SortingStrategy {
     @Override

@@ -1,3 +1,5 @@
+package StrategyPattern.java;
+
 public class SortingContext {
     private SortingStrategy sortingStrategy;
  
