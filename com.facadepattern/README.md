@@ -47,7 +47,7 @@ class VideoPlayer {
 // ImageLoader.java
 class ImageLoader {
     void loadImage(String filename) {
-        System.out.println("Loadig image " + filename);
+        System.out.println("Loading image " + filename);
     }
 }
 ```
