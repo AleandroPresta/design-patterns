@@ -1,24 +1,16 @@
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Facade Design Pattern](#facade-design-pattern)
+   * [Key Component of Facade Method Design Pattern](#key-component-of-facade-method-design-pattern)
+   * [Implementation](#implementation)
+      + [Subsystem Class:](#subsystem-class)
+      + [Facade Class:](#facade-class)
+      + [Client](#client)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="facade-design-pattern"></a>
 # Facade Design Pattern
-## Table of Contents
-
-1. [Facade Design Pattern](#facade-design-pattern)
-   - [Overview](#overview)
-   - [Functionalities](#functionalities)
-   
-2. [Key Components of Facade Method Design Pattern](#key-components-of-facade-method-design-pattern)
-   - [Subsystem](#subsystem)
-   - [Facade](#facade)
-   - [Client](#client)
-   
-3. [Implementation](#implementation)
-   - [Subsystem Classes](#subsystem-classes)
-     - [AudioPlayer Class](#audioplayer-class)
-     - [VideoPlayer Class](#videoplayer-class)
-     - [ImageLoader Class](#imageloader-class)
-   - [Facade Class](#facade-class)
-     - [MultimediaFacade Class](#multimediafacade-class)
-   - [Client Code](#client-code)
-
 
 **Facade Method Design Pattern** is a structural design pattern that provides a simplified interface to a complex subsystem. It acts as a “front door,” concealing the internal complexity of the subsystem and making it easier for clients to interact with it.
 
@@ -29,6 +21,7 @@ The functionalities of the Facade Method Design Patterns are :
 - It involves a single class, known as the “facade,” which provides a simplified, higher-level interface to a set of interfaces in a subsystem.
 - This simplification helps clients use the subsystem more easily without needing to understand its complexities.
 
+<!-- TOC --><a name="key-component-of-facade-method-design-pattern"></a>
 ## Key Component of Facade Method Design Pattern
 
 ![](images/key_component.png)
@@ -47,7 +40,9 @@ The functionalities of the Facade Method Design Patterns are :
     - Interacts solely with the Facade, unaware of the Subsystem’s internal structure.
     - Benefits from the simplified interface provided by the Facade, making code more concise and maintainable.
 
+<!-- TOC --><a name="implementation"></a>
 ## Implementation
+<!-- TOC --><a name="subsystem-class"></a>
 ### Subsystem Class:
 We have 3 complex functionalities, AudioPlayer, VideoPlayer and ImageLoader:
 ```java
@@ -73,6 +68,7 @@ class ImageLoader {
 }
 ```
 
+<!-- TOC --><a name="facade-class"></a>
 ### Facade Class:
 Here Facade class is Multimedia class.
 
@@ -103,6 +99,7 @@ class MultimediaFacade {
 }
 ```
 
+<!-- TOC --><a name="client"></a>
 ### Client
 ```java
 // Facade class
