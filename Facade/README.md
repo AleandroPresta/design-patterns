@@ -1,3 +1,5 @@
+# Facade Design Pattern
+
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
 - [Facade Design Pattern](#facade-design-pattern)
@@ -10,7 +12,6 @@
 <!-- TOC end -->
 
 <!-- TOC --><a name="facade-design-pattern"></a>
-# Facade Design Pattern
 
 **Facade Method Design Pattern** is a structural design pattern that provides a simplified interface to a complex subsystem. It acts as a “front door,” concealing the internal complexity of the subsystem and making it easier for clients to interact with it.
 
