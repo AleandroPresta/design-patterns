@@ -30,8 +30,43 @@ The code that uses the target interface to interact with objects. It remains una
 ![alt text](implementation.png)
 ### Target Interface (Printer)
 ```java
-
+public interface Printer {
+    void print(String message);
+}
 ```
 ### Adaptee (LegacyPrinter)
+```java
+public class LegacyPrinter {
+    public void printDocument(String message) {
+        System.out.println(message);
+    }
+}
+```
 ### Adapter (PrinterAdapter)
+```java
+public class PrinterAdapter implements Printer{
+
+    private LegacyPrinter legacyPrinter;
+
+    public PrinterAdapter(LegacyPrinter legacyPrinter) {
+        this.legacyPrinter = legacyPrinter;
+    }
+
+    @Override
+    public void print(String message) {
+        legacyPrinter.printDocument(message);
+    }
+    
+}
+```
 ### Client Code
+```java
+public class Client {
+
+    public static void main(String[] args) {
+        Printer printer = new PrinterAdapter(new LegacyPrinter());
+        printer.print("Hello, World!");
+    }
+    
+}
+```
