@@ -40,7 +40,79 @@ The Client is the code that initiates the construction of the complex object.
 ## Implementation
 ![alt text](uml.png)
 ### Computer
+```py
+class Computer:
+    cpu: str
+    ram: str
+    storage: str
+    
+    def __init__(self) -> None:
+        self.cpu = ''
+        self.ram = ''
+        self.storage = ''
+    
+    def set_cpu(self, cpu: str) -> None:
+        self.cpu = cpu
+        
+    def set_ram(self, ram: str) -> None:
+        self.ram = ram
+        
+    def set_storage(self, storage: str) -> None:
+        self.storage = storage
+        
+    def display_info(self) -> None:
+        print("Computer configuration:")
+        print(f"CPU: {self.cpu}")
+        print(f"RAM: {self.ram}")
+        print(f"Storage: {self.storage}")
+```
 ### Builder Implementation
+```py
+from abc import ABC, abstractmethod
+
+class Builder(ABC):
+    @abstractmethod
+    def build_cpu(self):
+        pass
+
+    @abstractmethod
+    def build_ram(self):
+        pass
+
+    @abstractmethod
+    def build_storage(self):
+        pass
+
+    @abstractmethod
+    def get_result(self):
+        pass
+```
 ### GamingComputerBuilder
+```py
+from Builder import Builder
+from Computer import Computer
+
+class GamingComputerBuilder(Builder):
+    
+    computer: Computer = Computer()
+    
+    def build_cpu(self) -> None:
+        self.computer.set_cpu('Intel Core i9-9900K')
+        
+    def build_ram(self) -> None:
+        self.computer.set_ram('Corsair Vengeance LPX 16GB')
+        
+    def build_storage(self) -> None:
+        self.computer.set_storage('Seagate Barracuda 2TB')
+        
+    def get_result(self) -> Computer:
+        return self.computer
+```
 ### Director Implementation
+```py
+
+```
 ### Client Implementation
+```py
+
+```
