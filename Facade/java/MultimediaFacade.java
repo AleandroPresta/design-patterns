@@ -1,6 +1,8 @@
-import com.facadepattern.java.AudioPlayer;
-import com.facadepattern.java.VideoPlayer;
-import com.facadepattern.java.ImageLoader;
+package Facade.java;
+
+import Facade.java.AudioPlayer;
+import Facade.java.VideoPlayer;
+import Facade.java.ImageLoader;
 
 // Facade class
 class MultimediaFacade {

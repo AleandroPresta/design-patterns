@@ -1,4 +1,4 @@
-package com.decoratorpattern.java;
+package Decorator.java;
 
 // Coffee.java
 public interface Coffee {

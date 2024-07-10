@@ -1,4 +1,6 @@
-package com.observerpattern.java;
+package Observer.java;
+
+
 
 // Usage Class
 public class WeatherApp {

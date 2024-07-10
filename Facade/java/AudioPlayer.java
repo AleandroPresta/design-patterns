@@ -1,4 +1,4 @@
-package com.facadepattern.java;
+package Facade.java;
 
 public class AudioPlayer {
     public void playAudio(String filename) {

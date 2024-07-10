@@ -1,4 +1,4 @@
-package com.observerpattern.java;
+package Observer.java;
 
 public interface Subject {
     void addObserver(Observer observer);

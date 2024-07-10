@@ -1,4 +1,4 @@
-package com.observerpattern.java;
+package Observer.java;
 
 public class PhoneDisplay implements Observer {
     private String weather;

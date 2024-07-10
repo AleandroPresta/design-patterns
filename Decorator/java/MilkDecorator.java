@@ -1,4 +1,4 @@
-package com.decoratorpattern.java;
+package Decorator.java;
 
 // MilkDecorator.java
 public class MilkDecorator extends CoffeeDecorator {
