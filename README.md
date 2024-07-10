@@ -8,7 +8,6 @@ Design patterns are standardized solutions to common problems encountered in sof
     <li><a href="./Decorator/">Decorator Pattern</a></li>
     <li><a href="./Facade/">Facade Pattern</a></li>
     <li><a href="./Factory/">Factory Pattern</a></li>
-    <li><a href="./Iterator/">Iterator Pattern</a></li>
     <li><a href="./Observer/">Observer Pattern</a></li>
     <li><a href="./Singleton">Singleton Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
@@ -21,7 +20,6 @@ Design patterns are standardized solutions to common problems encountered in sof
 - [Decorator Pattern](#decorator-pattern)
 - [Facade Pattern](#facade-pattern)
 - [Factory Pattern](#factory-pattern)
-- [Iterator Pattern](#iterator-pattern)
 - [Observer Pattern](#observer-pattern)
 - [Singleton Pattern](#singleton-pattern)
 - [Strategy Pattern](#strategy-pattern)
@@ -35,8 +33,6 @@ Design patterns are standardized solutions to common problems encountered in sof
 ![facade](/Facade/images/uml.png)
 ### Factory Pattern
 ![factory](/Factory/uml.png)
-### Iterator Pattern
-![iterator](/Iterator/uml.png)
 ### Observer Pattern
 ![observer](/Observer/images/image.png)
 ### Singleton Pattern
