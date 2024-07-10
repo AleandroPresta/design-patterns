@@ -1,9 +1,5 @@
 package Facade.java;
 
-import Facade.java.AudioPlayer;
-import Facade.java.VideoPlayer;
-import Facade.java.ImageLoader;
-
 // Facade class
 class MultimediaFacade {
     private AudioPlayer audioPlayer;
