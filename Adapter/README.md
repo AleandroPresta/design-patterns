@@ -17,6 +17,7 @@ The Adapter design pattern is a structural pattern that allows the interface of 
     - [Client Code](#client-code)
 
 ## Components
+The objective is to make the Adaptee of the Target interface using an Adapter.
 ### Target Interface
  Defines the interface expected by the client. It represents the set of operations that the client code can use.
 ### Adaptee
