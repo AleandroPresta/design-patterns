@@ -1,4 +1,4 @@
-package com.strategypattern.java;
+package Strategy.java;
 
 public interface SortingStrategy {
     void sort(int[] array);
