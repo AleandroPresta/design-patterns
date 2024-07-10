@@ -67,15 +67,15 @@ public class FourWheelerFactory implements VehicleFactory {
 ```
 ### Client
 ```java
-class Client {
-    private Vehicle pVehicle;
+public class Client {
+    public static void main(String[] args) {
+        VehicleFactory twoWheelerFactory = new TwoWheelerFactory();
+        Vehicle twoWheeler = twoWheelerFactory.createVehicle();
+        twoWheeler.printVehicle();
 
-    public Client(VehicleFactory factory) {
-        pVehicle = factory.createVehicle();
-    }
-
-    public Vehicle getVehicle() {
-        return pVehicle;
+        VehicleFactory fourWheelerFactory = new FourWheelerFactory();
+        Vehicle fourWheeler = fourWheelerFactory.createVehicle();
+        fourWheeler.printVehicle();
     }
 }
 ```
