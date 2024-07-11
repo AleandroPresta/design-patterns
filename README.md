@@ -5,6 +5,7 @@ Design patterns are standardized solutions to common problems encountered in sof
 <ul>
     <li><a href="./Adapter/">Adapter Pattern</a></li>
     <li><a href="./Builder/">Builder Pattern</a></li>
+    <li><a href="./Composite/">Composite Pattern</a></li>
     <li><a href="./Decorator/">Decorator Pattern</a></li>
     <li><a href="./Facade/">Facade Pattern</a></li>
     <li><a href="./Factory/">Factory Pattern</a></li>
@@ -17,6 +18,7 @@ Design patterns are standardized solutions to common problems encountered in sof
 ### UMLs Index
 - [Adapter Pattern](#adapter-pattern)
 - [Builder Pattern](#builder-pattern)
+- [Composite Pattern](#composite-pattern)
 - [Decorator Pattern](#decorator-pattern)
 - [Facade Pattern](#facade-pattern)
 - [Factory Pattern](#factory-pattern)
@@ -27,6 +29,8 @@ Design patterns are standardized solutions to common problems encountered in sof
 ![adapter](/Adapter/implementation.png)
 ### Builder Pattern
 ![builder](/Builder/uml.png)
+### Composite Pattern
+![composite](Composite/uml.png)
 ### Decorator Pattern
 ![decorator](/Decorator/images/uml.png)
 ### Facade Pattern
