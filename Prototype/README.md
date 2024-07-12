@@ -13,6 +13,7 @@ The Prototype Design Pattern is a creational pattern that enables the creation o
   - [Concrete Prototype (Circle)](#concrete-prototype-circle)
   - [Concrete Prototype (Rectangle)](#concrete-prototype-rectangle)
   - [Client (ShapeClient)](#client-shapeclient)
+  - [PrototypeExample](#prototypeexample)
 ## Components of Prototype Design Pattern
 ![alt text](uml.png)
 ### Prototype Interface or Abstract Class
@@ -70,3 +71,40 @@ public class Circle implements Shape {
 ```
 ### Client (ShapeClient)
 We create a client class, `ShapeClient`, which will use the prototype to create new shapes. The client has a field `shapePrototype` representing the prototype it will use. The constructor takes a `Shape` prototype, and there’s a method `createShape()` that creates a new shape using the prototype’s `clone()` method.
+
+```java
+// This is like a user of shapes.
+// It uses a prototype (a shape) to create new shapes.
+public class ShapeClient {
+	private Shape shapePrototype;
+
+	// When you create a client, you give it a prototype (a shape).
+	public ShapeClient(Shape shapePrototype) {
+		this.shapePrototype = shapePrototype;
+	}
+
+	// This method creates a new shape using the prototype.
+	public Shape createShape() {
+		return shapePrototype.clone();
+	}
+}
+```
+
+### PrototypeExample
+```java
+public class PrototypeExample {
+    public static void main(String[] args) {
+        // Create a concrete prototype (a red circle).
+        Shape circlePrototype = new Circle("red");
+ 
+        // Create a client and give it the prototype.
+        ShapeClient client = new ShapeClient(circlePrototype);
+ 
+        // Use the prototype to create a new shape (a red circle).
+        Shape redCircle = client.createShape();
+ 
+        // Draw the newly created red circle.
+        redCircle.draw();
+    }
+}
+```
