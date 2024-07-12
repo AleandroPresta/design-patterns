@@ -22,7 +22,7 @@ The **Prototype Interface** or **Abstract Class** declares the method(s) for clo
 ### Concrete Prototype
 The **Concrete Prototype** is a class that implements the prototype interface or extends the abstract class. It’s the class representing a specific type of object that you want to clone.
 
- It defines the details of how the cloning process should be carried out for instances of that class.
+- It defines the details of how the cloning process should be carried out for instances of that class.
 - Implements the clone method declared in the prototype interface, providing the cloning logic specific to the class.
 ### Client
 The **Client** is the code or module that requests the creation of new objects by interacting with the prototype. It initiates the cloning process without being aware of the concrete classes involved.
