@@ -10,6 +10,7 @@ Design patterns are standardized solutions to common problems encountered in sof
     <li><a href="./Facade/">Facade Pattern</a></li>
     <li><a href="./Factory/">Factory Pattern</a></li>
     <li><a href="./Observer/">Observer Pattern</a></li>
+    <li><a href="./Prototype/">Prototype Pattern</a></li>
     <li><a href="./Singleton">Singleton Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
 </ul>
@@ -23,6 +24,7 @@ Design patterns are standardized solutions to common problems encountered in sof
 - [Facade Pattern](#facade-pattern)
 - [Factory Pattern](#factory-pattern)
 - [Observer Pattern](#observer-pattern)
+- [Prototype Pattern](#prototype-pattern)
 - [Singleton Pattern](#singleton-pattern)
 - [Strategy Pattern](#strategy-pattern)
 ### Adapter Pattern
@@ -39,6 +41,8 @@ Design patterns are standardized solutions to common problems encountered in sof
 ![factory](/Factory/uml.png)
 ### Observer Pattern
 ![observer](/Observer/images/image.png)
+### Prototype Pattern
+![prototype](/Prototype/uml.png)
 ### Singleton Pattern
 ![singleton](/Singleton/images/implementation.png)
 ### Strategy Pattern
