@@ -1,26 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategy Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Strategy Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="#">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="#">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="strategy-design-pattern">Strategy Design Pattern</h1>
+            <p>
+                The Strategy Design Pattern defines a family of algorithms,
+                encapsulates each one, and makes them interchangeable, allowing
+                clients to switch algorithms dynamically without altering the
+                code structure.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#characteristics-of-the-strategy-design-pattern"
+                        >Characteristics of the Strategy Design Pattern</a
+                    >
+                </li>
+                <li>
+                    <a href="#components-of-the-strategy-design-pattern"
+                        >Components of the Strategy Design Pattern</a
+                    >
+                    <ul>
+                        <li><a href="#context">Context</a></li>
+                        <li>
+                            <a href="#strategy-interface">Strategy Interface</a>
+                        </li>
+                        <li>
+                            <a href="#concrete-strategies"
+                                >Concrete Strategies</a
+                            >
+                        </li>
+                        <li><a href="#client">Client</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#communication-between-the-components"
+                        >Communication between the Components</a
+                    >
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li><a href="#sortingcontext">SortingContext</a></li>
+                        <li>
+                            <a href="#sortingstrategy-interface"
+                                >SortingStrategy (Interface)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#concrete-strategies-implementation"
+                                >Concrete Strategies</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="characteristics-of-the-strategy-design-pattern">
+                Characteristics of the Strategy Design Pattern
+            </h2>
+            <p>
+                The Strategy Design Pattern exhibits several key characteristics
+                that make it distinctive and effective for managing algorithm
+                variations in software systems:
+            </p>
+            <ul>
+                <li>
+                    <strong>It defines a family of algorithms</strong>: The
+                    pattern allows you to encapsulate multiple algorithms or
+                    behaviors into separate classes, known as strategies.
+                </li>
+                <li>
+                    <strong>It encapsulates behaviors</strong>: Each strategy
+                    encapsulates a specific behavior or algorithm, providing a
+                    clean and modular way to manage different variations or
+                    implementations.
+                </li>
+                <li>
+                    <strong>It enables dynamic behavior switching</strong>: The
+                    pattern enables clients to switch between different
+                    strategies at runtime, allowing for flexible and dynamic
+                    behavior changes.
+                </li>
+                <li>
+                    <strong>It promotes object collaboration</strong>: The
+                    pattern encourages collaboration between a context object
+                    and strategy objects, where the context delegates the
+                    execution of a behavior to a strategy object.
+                </li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-the-strategy-design-pattern">
+                Components of the Strategy Design Pattern
+            </h2>
+            <p>
+                <img
+                    src="images/components.png"
+                    alt="Components of the Strategy Design Pattern"
+                />
+            </p>
+            <h3 id="context">Context</h3>
+            <p>
+                The <strong>Context</strong> is a class or object that holds a
+                reference to a strategy object and delegates the task to it.
+            </p>
+            <p>
+                It acts as the interface between the client and the strategy,
+                providing a unified way to execute the task without knowing the
+                details of how it’s done. The Context maintains a reference to a
+                strategy object and calls its methods to perform the task,
+                allowing for interchangeable strategies to be used.
+            </p>
+            <h3 id="strategy-interface">Strategy Interface</h3>
+            <p>
+                The <strong>Strategy Interface</strong> is an interface or
+                abstract class that defines a set of methods that all concrete
+                strategies must implement.
+            </p>
+            <p>
+                It serves as a contract, ensuring that all strategies adhere to
+                the same set of rules and can be used interchangeably by the
+                Context. By defining a common interface, the Strategy Interface
+                allows for decoupling between the Context and the concrete
+                strategies, promoting flexibility and modularity in the design.
+            </p>
+            <h3 id="concrete-strategies">Concrete Strategies</h3>
+            <p>
+                <strong>Concrete Strategies</strong> are the various
+                implementations of the Strategy Interface. Each concrete
+                strategy provides a specific algorithm or behavior for
+                performing the task defined by the Strategy Interface.
+            </p>
+            <p>
+                Concrete strategies encapsulate the details of their respective
+                algorithms and provide a method for executing the task. They are
+                interchangeable and can be selected and configured by the client
+                based on the requirements of the task.
+            </p>
+            <h3 id="client">Client</h3>
+            <p>
+                The <strong>Client</strong> is responsible for selecting and
+                configuring the appropriate strategy and providing it to the
+                Context.
+            </p>
+            <p>
+                It knows the requirements of the task and decides which strategy
+                to use based on those requirements. The client creates an
+                instance of the desired concrete strategy and passes it to the
+                Context, enabling the Context to use the selected strategy to
+                perform the task.
+            </p>
+            <h2 id="communication-between-the-components">
+                Communication between the Components
+            </h2>
+            <p>
+                In the Strategy Design Pattern, communication between the
+                components occurs in a structured and decoupled manner. Here’s
+                how the components interact with each other:
+            </p>
+            <ul>
+                <li>
+                    <strong>Client to Context</strong>:
+                    <ul>
+                        <li>
+                            The <strong>Client</strong>, which knows the
+                            requirements of the task, interacts with the
+                            <strong>Context</strong> to initiate the task
+                            execution.
+                        </li>
+                        <li>
+                            The <strong>Client</strong> selects an appropriate
+                            strategy based on the task requirements and provides
+                            it to the <strong>Context</strong>.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Context to Strategy</strong>:
+                    <ul>
+                        <li>
+                            The Context holds a reference to the selected
+                            strategy and delegates the task to it.
+                        </li>
+                        <li>
+                            The Context invokes a method on the strategy object,
+                            triggering the execution of the specific algorithm
+                            or behavior encapsulated within the strategy.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Strategy to Context</strong>:
+                    <ul>
+                        <li>
+                            Once the strategy completes its execution, it may
+                            return a result or perform any necessary actions.
+                        </li>
+                        <li>
+                            The <strong>strategy</strong> communicates the
+                            result or any relevant information back to the
+                            <strong>Context</strong>, which may further process
+                            or utilize the result as needed.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Strategy Interface as Contract</strong>:
+                    <ul>
+                        <li>
+                            The <strong>Strategy Interface</strong> serves as a
+                            contract that defines a set of methods that all
+                            concrete strategies must implement. The Context
+                            communicates with strategies through the common
+                            interface, promoting interchangeability and
+                            decoupling.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Decoupled Communication</strong>:
+                    <ul>
+                        <li>
+                            Communication between the components is decoupled,
+                            meaning that the Context does not need to know the
+                            specific details of how each strategy implements the
+                            task.
+                        </li>
+                        <li>
+                            Strategies can be swapped or replaced without
+                            impacting the client or other strategies, as long as
+                            they adhere to the common interface.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="images/uml.png" alt="UML Strategy Pattern" /></p>
+            <h3 id="sortingcontext">SortingContext</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> SortingContext {
+    <span class="hljs-keyword">private</span> SortingStrategy sortingStrategy;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SortingContext</span><span class="hljs-params">(SortingStrategy sortingStrategy)</span> </span>{
+        <span class="hljs-keyword">this</span>.sortingStrategy = sortingStrategy;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSortingStrategy</span><span class="hljs-params">(SortingStrategy sortingStrategy)</span> </span>{
+        <span class="hljs-keyword">this</span>.sortingStrategy = sortingStrategy;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">performSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] <span class="hljs-built_in">array</span>)</span> </span>{
+        sortingStrategy.sort(<span class="hljs-built_in">array</span>);
+    }
+}
+</code></pre>
+            <h3 id="sortingstrategy-interface">SortingStrategy (Interface)</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">SortingStrategy</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sort</span>(<span class="hljs-params"><span class="hljs-keyword">int</span>[] array</span>)</span>;
+}
+</code></pre>
+            <h3 id="concrete-strategies-implementation">Concrete Strategies</h3>
+            <pre><code class="lang-java"><span class="hljs-comment">// BubbleSortStrategy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BubbleSortStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">SortingStrategy</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>{
+        <span class="hljs-comment">// Implement Bubble Sort algorithm</span>
+        System.out.println(<span class="hljs-string">"Sorting using Bubble Sort"</span>);
+    }
+}
+
+<span class="hljs-comment">// MergeSortStrategy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MergeSortStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">SortingStrategy</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>{
+        <span class="hljs-comment">// Implement Merge Sort algorithm</span>
+        System.out.println(<span class="hljs-string">"Sorting using Merge Sort"</span>);
+    }
+}
+
+<span class="hljs-comment">// QuickSortStrategy</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QuickSortStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">SortingStrategy</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>{
+        <span class="hljs-comment">// Implement Quick Sort algorithm</span>
+        System.out.println(<span class="hljs-string">"Sorting using Quick Sort"</span>);
+    }
+}
+</code></pre>
+        </div>
+    </body>
 </html>
