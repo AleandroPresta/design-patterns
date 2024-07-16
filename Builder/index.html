@@ -1,22 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Builder Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="#">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Builder Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="#">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="builder-design-pattern">Builder Design Pattern</h1>
+            <p>
+                The Builder Design Pattern is a creational pattern used in
+                software design to construct a complex object step by step. It
+                allows the construction of a product in a step-by-step fashion,
+                where the construction process can vary based on the type of
+                product being built. The pattern separates the construction of a
+                complex object from its representation, allowing the same
+                construction process to create different representations.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#components">Components</a>
+                    <ul>
+                        <li><a href="#product">Product</a></li>
+                        <li><a href="#builder">Builder</a></li>
+                        <li><a href="#concrete-builder">ConcreteBuilder</a></li>
+                        <li><a href="#director">Director</a></li>
+                        <li><a href="#client">Client</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li><a href="#computer">Computer</a></li>
+                        <li><a href="#builder-implementation">Builder</a></li>
+                        <li>
+                            <a href="#gamingcomputerbuilder"
+                                >GamingComputerBuilder</a
+                            >
+                        </li>
+                        <li><a href="#director-implementation">Director</a></li>
+                        <li><a href="#client-implementation">Client</a></li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="components">Components</h2>
+            <h3 id="product">Product</h3>
+            <p>
+                The <strong>Product</strong> is the complex object that the
+                Builder pattern is responsible for constructing.
+            </p>
+            <ul>
+                <li>
+                    It may consist of multiple components or parts, and its
+                    structure can vary based on the implementation.
+                </li>
+                <li>
+                    The Product is typically a class with attributes
+                    representing the different parts that the Builder
+                    constructs.
+                    <h3 id="builder">Builder</h3>
+                    The <strong>Builder</strong> is an interface or an abstract
+                    class that declares the construction steps for building a
+                    complex object.
+                </li>
+                <li>
+                    It typically includes methods for constructing individual
+                    parts of the product.
+                </li>
+                <li>
+                    By defining an interface, the Builder allows for the
+                    creation of different concrete builders that can produce
+                    variations of the product.
+                    <h3 id="concretebuilder">ConcreteBuilder</h3>
+                    <strong>ConcreteBuilder</strong> classes implement the
+                    Builder interface, providing specific implementations for
+                    building each part of the product.
+                </li>
+                <li>
+                    Each ConcreteBuilder is tailored to create a specific
+                    variation of the product.
+                </li>
+                <li>
+                    It keeps track of the product being constructed and provides
+                    methods for setting or constructing each part.
+                    <h3 id="director">Director</h3>
+                    The <strong>Director</strong> is responsible for managing
+                    the construction process of the complex object.
+                </li>
+                <li>
+                    It collaborates with a Builder, but it doesn’t know the
+                    specific details about how each part of the object is
+                    constructed.
+                </li>
+                <li>
+                    It provides a high-level interface for constructing the
+                    product and managing the steps needed to create the complex
+                    object.
+                    <h3 id="client">Client</h3>
+                    The Client is the code that initiates the construction of
+                    the complex object.
+                </li>
+                <li>
+                    It creates a Builder object and passes it to the Director to
+                    initiate the construction process.
+                </li>
+                <li>
+                    The Client may retrieve the final product from the Builder
+                    after construction is complete.
+                    <h2 id="implementation">Implementation</h2>
+                    <img src="uml.png" alt="alt text" />
+                </li>
             </ul>
-        </nav>
-        
-    </div>
-</body>
+            <h3 id="computer">Computer</h3>
+            <pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computer</span>:</span>
+    cpu: str
+    ram: str
+    storage: str
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.cpu = <span class="hljs-string">''</span>
+        self.ram = <span class="hljs-string">''</span>
+        self.storage = <span class="hljs-string">''</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_cpu</span><span class="hljs-params">(self, cpu: str)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.cpu = cpu
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_ram</span><span class="hljs-params">(self, ram: str)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.ram = ram
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">set_storage</span><span class="hljs-params">(self, storage: str)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.storage = storage
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">display_info</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        print(<span class="hljs-string">"Computer configuration:"</span>)
+        print(f<span class="hljs-string">"CPU: {self.cpu}"</span>)
+        print(f<span class="hljs-string">"RAM: {self.ram}"</span>)
+        print(f<span class="hljs-string">"Storage: {self.storage}"</span>)
+</code></pre>
+            <h3 id="builder-implementation">Builder Implementation</h3>
+            <pre><code class="lang-py"><span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Builder</span><span class="hljs-params">(ABC)</span>:</span>
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_cpu</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_ram</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_storage</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_result</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">pass</span>
+</code></pre>
+            <h3 id="gamingcomputerbuilder">GamingComputerBuilder</h3>
+            <pre><code class="lang-py"><span class="hljs-keyword">from</span> Builder <span class="hljs-keyword">import</span> Builder
+<span class="hljs-keyword">from</span> Computer <span class="hljs-keyword">import</span> Computer
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GamingComputerBuilder</span><span class="hljs-params">(Builder)</span>:</span>
+
+    computer: Computer = Computer()
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_cpu</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.computer.set_cpu(<span class="hljs-string">'Intel Core i9-9900K'</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_ram</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.computer.set_ram(<span class="hljs-string">'Corsair Vengeance LPX 16GB'</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build_storage</span><span class="hljs-params">(self)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        self.computer.set_storage(<span class="hljs-string">'Seagate Barracuda 2TB'</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_result</span><span class="hljs-params">(self)</span> -&gt; Computer:</span>
+        <span class="hljs-keyword">return</span> self.computer
+</code></pre>
+            <h3 id="director-implementation">Director Implementation</h3>
+            <pre><code class="lang-py"><span class="hljs-keyword">from</span> GamingComputerBuilder <span class="hljs-keyword">import</span> GamingComputerBuilder
+<span class="hljs-keyword">from</span> Builder <span class="hljs-keyword">import</span> Builder
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Director</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">construct</span><span class="hljs-params">(self, builder: Builder)</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+        builder.build_cpu()
+        builder.build_ram()
+        builder.build_storage()
+</code></pre>
+            <h3 id="client-implementation">Client Implementation</h3>
+            <pre><code class="lang-py"><span class="hljs-keyword">from</span> GamingComputerBuilder <span class="hljs-keyword">import</span> GamingComputerBuilder
+<span class="hljs-keyword">from</span> OfficeComputerBuilder <span class="hljs-keyword">import</span> OfficeComputerBuilder
+<span class="hljs-keyword">from</span> Director <span class="hljs-keyword">import</span> Director
+<span class="hljs-keyword">from</span> Builder <span class="hljs-keyword">import</span> Builder
+<span class="hljs-keyword">from</span> Computer <span class="hljs-keyword">import</span> Computer
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> -&gt; <span class="hljs-keyword">None</span>:</span>
+    gaming_computer_builder: Builder = GamingComputerBuilder()
+    director = Director()
+
+    director.construct(gaming_computer_builder)
+    gaming_computer: Computer = gaming_computer_builder.get_result()
+
+    gaming_computer.display_info()
+
+    office_computer_builder: Builder = OfficeComputerBuilder()
+
+    director.construct(office_computer_builder)
+    office_computer: Computer = office_computer_builder.get_result()
+
+    office_computer.display_info()
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    main()
+</code></pre>
+        </div>
+    </body>
 </html>
