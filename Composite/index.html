@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Composite Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,152 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="composite-pattern">Composite Pattern</h1>
+<p>The Composite Design Pattern is a structural design pattern that lets you compose objects into tree-like structures to represent part-whole hierarchies. It allows clients to treat individual objects and compositions of objects uniformly. In other words, whether dealing with a single object or a group of objects (composite), clients can use them interchangeably.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+    <li><a href="#components-of-composite-design-pattern">Components of Composite Design Pattern</a>
+        <ul>
+            <li><a href="#component">Component</a></li>
+            <li><a href="#leaf">Leaf</a></li>
+            <li><a href="#composite">Composite</a></li>
+            <li><a href="#client">Client</a></li>
+        </ul>
+    </li>
+    <li><a href="#implementation">Implementation</a>
+        <ul>
+            <li><a href="#task">Task</a></li>
+            <li><a href="#simpletask-leaf">SimpleTask (Leaf)</a></li>
+            <li><a href="#tasklist-composite">TaskList (Composite)</a></li>
+            <li><a href="#taskmanagementapp-client">TaskManagerApp (Client)</a></li>
+        </ul>
+    </li>
+</ol>
+
+<h2 id="components-of-composite-design-pattern">Components of Composite Design Pattern</h2>
+<h3 id="component">Component</h3>
+<p>The <strong>component</strong> declares the interface for objects in the composition and for accessing and managing its child components. This is like a blueprint that tells us what both individual items (leaves) and groups of items (composites) should be able to do. It lists the things they all have in common.</p>
+<h3 id="leaf">Leaf</h3>
+<p><strong>Leaf</strong> defines behavior for primitive objects in the composition. This is the basic building block of the composition, representing individual objects that don’t have any child components. Leaf elements implement the operations defined by the Component interface.</p>
+<h3 id="composite">Composite</h3>
+<p><strong>Composite</strong> stores child components and implements child-related operations in the component interface. This is a class that has child components, which can be either leaf elements or other composites. A composite class implements the methods declared in the Component interface, often by delegating the operations to its child components.</p>
+<h3 id="client">Client</h3>
+<p>The <strong>client</strong> manipulates the objects in the composition through the component interface. The client uses the component class interface to interact with objects in the composition structure. If the recipient is a leaf then the request is handled directly. If the recipient is a composite, then it usually forwards the request to its child components, possibly performing additional operations before and after forwarding.</p>
+<h2 id="implementation">Implementation</h2>
+<p><img src="uml.png" alt="uml"></p>
+<h3 id="task">Task</h3>
+<ul>
+<li>Represents the common interface for both simple tasks and task lists.</li>
+<li>Defines methods such as <code>getTitle()</code>, <code>setTitle()</code>, and <code>display()</code>.</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Task</span> {
+    <span class="hljs-function">String <span class="hljs-title">getTitle</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setTitle</span>(<span class="hljs-params">String title</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+<h3 id="simpletask-leaf-">SimpleTask (Leaf)</h3>
+<ul>
+<li>Represents an individual task with a title.</li>
+<li>Implements the Task interface.</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleTask</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Task</span> </span>{
+    <span class="hljs-keyword">private</span> String title;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SimpleTask</span><span class="hljs-params">(String title)</span> </span>{
+        <span class="hljs-keyword">this</span>.title = title;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getTitle</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> title;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setTitle</span><span class="hljs-params">(String title)</span> </span>{
+        <span class="hljs-keyword">this</span>.title = title;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Simple Task: "</span> + title);
+    }
+}
+</code></pre>
+<h3 id="tasklist-composite-">TaskList (Composite)</h3>
+<ul>
+<li>Represents a collection of tasks, which can include both simple tasks and other task lists.</li>
+<li>Implements the Task interface but also has a list of tasks (List\<Task\>).</li>
+<li>Defines methods to add, remove, and display tasks.</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> TaskList implements <span class="hljs-built_in">Task</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> title;
+    <span class="hljs-keyword">private</span> List&lt;<span class="hljs-built_in">Task</span>&gt; tasks;
+
+    <span class="hljs-keyword">public</span> TaskList(<span class="hljs-keyword">String</span> title) {
+        <span class="hljs-keyword">this</span>.title = title;
+        <span class="hljs-keyword">this</span>.tasks = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    }
+
+    @Override
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getTitle() {
+        <span class="hljs-built_in">return</span> title;
+    }
+
+    @Override
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> setTitle(<span class="hljs-keyword">String</span> title) {
+        <span class="hljs-keyword">this</span>.title = title;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> addTask(<span class="hljs-built_in">Task</span> task) {
+        tasks.add(task);
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> removeTask(<span class="hljs-built_in">Task</span> task) {
+        tasks.<span class="hljs-built_in">remove</span>(task);
+    }
+
+    @Override
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-built_in">display</span>() {
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Task List: "</span> + title);
+        <span class="hljs-built_in">for</span> (<span class="hljs-built_in">Task</span> task : tasks) {
+            task.<span class="hljs-built_in">display</span>();
+        }
+    }
+}
+</code></pre>
+<h3 id="taskmanagementapp-client-">TaskManagementApp (Client)</h3>
+<ul>
+<li>Represents the application that uses the Composite Design Pattern to manage tasks.</li>
+<li>It creates a mix of simple tasks and task lists, showcasing how the Composite pattern allows treating both individual tasks and task collections uniformly.</li>
+<li>The created tasks are displayed in a hierarchical structure to illustrate the pattern’s flexibility and uniform handling of different task types.</li>
+</ul>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TaskManagementApp</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) {
+        <span class="hljs-comment">// Creating simple tasks</span>
+        Task simpleTask1 = <span class="hljs-keyword">new</span> <span class="hljs-type">SimpleTask</span>(<span class="hljs-string">"Complete Coding"</span>);
+        Task simpleTask2 = <span class="hljs-keyword">new</span> <span class="hljs-type">SimpleTask</span>(<span class="hljs-string">"Write Documentation"</span>);
+
+        <span class="hljs-comment">// Creating a task list</span>
+        TaskList projectTasks = <span class="hljs-keyword">new</span> <span class="hljs-type">TaskList</span>(<span class="hljs-string">"Project Tasks"</span>);
+        projectTasks.addTask(simpleTask1);
+        projectTasks.addTask(simpleTask2);
+
+        <span class="hljs-comment">// Nested task list</span>
+        TaskList phase1Tasks = <span class="hljs-keyword">new</span> <span class="hljs-type">TaskList</span>(<span class="hljs-string">"Phase 1 Tasks"</span>);
+        phase1Tasks.addTask(<span class="hljs-keyword">new</span> <span class="hljs-type">SimpleTask</span>(<span class="hljs-string">"Design"</span>));
+        phase1Tasks.addTask(<span class="hljs-keyword">new</span> <span class="hljs-type">SimpleTask</span>(<span class="hljs-string">"Implementation"</span>));
+
+        projectTasks.addTask(phase1Tasks);
+
+        <span class="hljs-comment">// Displaying tasks</span>
+        projectTasks.display();
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
