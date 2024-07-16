@@ -1,7 +1,11 @@
 # Design Patterns
+
 Design patterns are standardized solutions to common problems encountered in software design. They provide a template or blueprint for how to solve a particular issue in a way that is both efficient and reusable. These patterns help developers avoid reinventing the wheel by offering time-tested methods for handling recurring design challenges.
 
+For the website version <a href="https://aleandropresta.github.io/design-patterns/">click here</a>
+
 ## Folders Index
+
 <ul>
     <li><a href="./Adapter/">Adapter Pattern</a></li>
     <li><a href="./Builder/">Builder Pattern</a></li>
@@ -16,34 +20,56 @@ Design patterns are standardized solutions to common problems encountered in sof
 </ul>
 
 ## UMLs
+
 ### UMLs Index
-- [Adapter Pattern](#adapter-pattern)
-- [Builder Pattern](#builder-pattern)
-- [Composite Pattern](#composite-pattern)
-- [Decorator Pattern](#decorator-pattern)
-- [Facade Pattern](#facade-pattern)
-- [Factory Pattern](#factory-pattern)
-- [Observer Pattern](#observer-pattern)
-- [Prototype Pattern](#prototype-pattern)
-- [Singleton Pattern](#singleton-pattern)
-- [Strategy Pattern](#strategy-pattern)
+
+-   [Adapter Pattern](#adapter-pattern)
+-   [Builder Pattern](#builder-pattern)
+-   [Composite Pattern](#composite-pattern)
+-   [Decorator Pattern](#decorator-pattern)
+-   [Facade Pattern](#facade-pattern)
+-   [Factory Pattern](#factory-pattern)
+-   [Observer Pattern](#observer-pattern)
+-   [Prototype Pattern](#prototype-pattern)
+-   [Singleton Pattern](#singleton-pattern)
+-   [Strategy Pattern](#strategy-pattern)
+
 ### Adapter Pattern
+
 ![adapter](/Adapter/implementation.png)
+
 ### Builder Pattern
+
 ![builder](/Builder/uml.png)
+
 ### Composite Pattern
+
 ![composite](Composite/uml.png)
+
 ### Decorator Pattern
+
 ![decorator](/Decorator/images/uml.png)
+
 ### Facade Pattern
+
 ![facade](/Facade/images/uml.png)
+
 ### Factory Pattern
+
 ![factory](/Factory/uml.png)
+
 ### Observer Pattern
+
 ![observer](/Observer/images/image.png)
+
 ### Prototype Pattern
+
 ![prototype](/Prototype/uml.png)
+
 ### Singleton Pattern
+
 ![singleton](/Singleton/images/implementation.png)
+
 ### Strategy Pattern
+
 ![strategy](/Strategy/images/uml.png)
