@@ -32,6 +32,45 @@
                 class. It involves creating a set of decorator classes that are
                 used to wrap concrete components.
             </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#characteristics-of-the-decorator-pattern">Characteristics of the Decorator Pattern</a>
+                </li>
+                <li>
+                    <a href="#use-cases-for-the-decorator-pattern">Use Cases for the Decorator Pattern</a>
+                </li>
+                <li>
+                    <a href="#key-components-of-the-decorator-design-pattern">Key Components of the Decorator Design Pattern</a>
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li>
+                            <a href="#component-interface-coffee"
+                                >Component Interface(Coffee)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#concretecomponent-plaincoffee"
+                                >ConcreteComponent(PlainCoffee)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#decorator-coffeedecorator"
+                                >Decorator(CoffeeDecorator)</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="#concretedecorators-milkdecorator-sugardecorator"
+                                >ConcreteDecorators(MilkDecorator,SugarDecorator)</a
+                            >
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
             <h2 id="characteristics-of-the-decorator-pattern">
                 Characteristics of the Decorator Pattern
             </h2>
@@ -126,7 +165,7 @@
             </ul>
             <h2 id="implementation">Implementation</h2>
             <p><img src="images/uml.png" alt="UML Decorator Pattern" /></p>
-            <h3 id="component-interface-coffee-">
+            <h3 id="component-interface-coffee">
                 Component Interface(Coffee)
             </h3>
             <p>
@@ -141,7 +180,7 @@
     <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">getCost</span>(<span class="hljs-params"></span>)</span>;
 }
 </code></pre>
-            <h3 id="concretecomponent-plaincoffee-">
+            <h3 id="concretecomponent-plaincoffee">
                 ConcreteComponent(PlainCoffee)
             </h3>
             <p>
@@ -163,7 +202,7 @@
     }
 }
 </code></pre>
-            <h2 id="decorator-coffeedecorator-">Decorator(CoffeeDecorator)</h2>
+            <h2 id="decorator-coffeedecorator">Decorator(CoffeeDecorator)</h2>
             <p>
                 CoffeeDecorator is an abstract class implementing the Coffee
                 interface. It maintains a reference to the decorated Coffee
@@ -190,7 +229,7 @@
     }
 }
 </code></pre>
-            <h3 id="concretedecorators-milkdecorator-sugardecorator-">
+            <h3 id="concretedecorators-milkdecorator-sugardecorator">
                 ConcreteDecorators(MilkDecorator,SugarDecorator)
             </h3>
             <p>
