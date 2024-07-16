@@ -100,19 +100,19 @@
             </p>
             <h2 id="implementation">Implementation</h2>
             <p><img src="implementation.png" alt="alt text" /></p>
-            <h3 id="target-interface-printer-">Target Interface (Printer)</h3>
+            <h3 id="target-interface-printer">Target Interface (Printer)</h3>
             <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Printer</span> {
     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span>(<span class="hljs-params">String message</span>)</span>;
 }
 </code></pre>
-            <h3 id="adaptee-legacyprinter-">Adaptee (LegacyPrinter)</h3>
+            <h3 id="adaptee-legacyprinter">Adaptee (LegacyPrinter)</h3>
             <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LegacyPrinter</span> {
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printDocument</span>(<span class="hljs-params">String message</span>) </span>{
         System.<span class="hljs-keyword">out</span>.println(message);
     }
 }
 </code></pre>
-            <h3 id="adapter-printeradapter-">Adapter (PrinterAdapter)</h3>
+            <h3 id="adapter-printeradapter">Adapter (PrinterAdapter)</h3>
             <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PrinterAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Printer</span></span>{
 
     <span class="hljs-keyword">private</span> LegacyPrinter legacyPrinter;

@@ -24,6 +24,195 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="facade-design-pattern">Facade Design Pattern</h1>
+            <ol>
+                <li>
+                    <a href="#facade-design-pattern">Facade Design Pattern</a>
+                    <ul>
+                        <li>
+                            <a
+                                href="#key-component-of-facade-method-design-pattern"
+                                >Key Component of Facade Method Design
+                                Pattern</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#implementation">Implementation</a>
+                            <ul>
+                                <li>
+                                    <a href="#subsystem-class"
+                                        >Subsystem Class</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#facade-class">Facade Class</a>
+                                </li>
+                                <li><a href="#client">Client</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <p>
+                <strong>Facade Method Design Pattern</strong> is a structural
+                design pattern that provides a simplified interface to a complex
+                subsystem. It acts as a “front door,” concealing the internal
+                complexity of the subsystem and making it easier for clients to
+                interact with it.
+            </p>
+            <p><img src="images/pattern.png" alt="" /></p>
+            <p>
+                The functionalities of the Facade Method Design Patterns are :
+            </p>
+            <ul>
+                <li>
+                    It involves a single class, known as the “facade,” which
+                    provides a simplified, higher-level interface to a set of
+                    interfaces in a subsystem.
+                </li>
+                <li>
+                    This simplification helps clients use the subsystem more
+                    easily without needing to understand its complexities.
+                </li>
+            </ul>
+            <h2 id="key-component-of-facade-method-design-pattern">
+                Key Component of Facade Method Design Pattern
+            </h2>
+            <p><img src="images/key_component.png" alt="" /></p>
+            <ul>
+                <li>
+                    <strong>Subsystem</strong>:
+                    <ul>
+                        <li>
+                            Represents the complex part of the system that the
+                            Facade aims to simplify. Comprises multiple classes
+                            and interfaces that collaborate to provide a set of
+                            functionalities.
+                        </li>
+                        <li>
+                            Clients typically should not interact with the
+                            Subsystem directly, but only through the Facade.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Facade</strong>:
+                    <ul>
+                        <li>The heart of the pattern.</li>
+                        <li>
+                            Acts as a simplified, unified interface to the
+                            Subsystem.
+                        </li>
+                        <li>
+                            Clients interact exclusively with the Facade, not
+                            with the underlying Subsystem classes.
+                        </li>
+                        <li>
+                            Typically has methods that delegate calls to
+                            appropriate classes within the Subsystem, hiding
+                            their complexity.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Client</strong>:
+                    <ul>
+                        <li>
+                            Represents any code that needs to utilize the
+                            Subsystem’s functionality.
+                        </li>
+                        <li>
+                            Interacts solely with the Facade, unaware of the
+                            Subsystem’s internal structure.
+                        </li>
+                        <li>
+                            Benefits from the simplified interface provided by
+                            the Facade, making code more concise and
+                            maintainable.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <h2 id="implementation">Implementation</h2>
+            <h3 id="subsystem-class">Subsystem Class:</h3>
+            <p>
+                We have 3 complex functionalities, AudioPlayer, VideoPlayer and
+                ImageLoader:
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// AudioPlayer.java</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">AudioPlayer</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">playAudio</span>(<span class="hljs-params">String filename</span>) </span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Playing audio "</span> + filename);
+    }
+}
+
+<span class="hljs-comment">// VideoPlayer.java</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">VideoPlayer</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">playVideo</span>(<span class="hljs-params">String filename</span>) </span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Playing video "</span> + filename);
+    }
+}
+
+<span class="hljs-comment">// ImageLoader.java</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">ImageLoader</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loadImage</span>(<span class="hljs-params">String filename</span>) </span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Loading image "</span> + filename);
+    }
+}
+</code></pre>
+            <h3 id="facade-class">Facade Class:</h3>
+            <p>Here Facade class is Multimedia class.</p>
+            <pre><code class="lang-java"><span class="hljs-comment">// Facade class</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">MultimediaFacade</span> {
+    <span class="hljs-keyword">private</span> AudioPlayer audioPlayer;
+    <span class="hljs-keyword">private</span> VideoPlayer videoPlayer;
+    <span class="hljs-keyword">private</span> ImageLoader imageLoader;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MultimediaFacade</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.audioPlayer = <span class="hljs-keyword">new</span> AudioPlayer();
+        <span class="hljs-keyword">this</span>.videoPlayer = <span class="hljs-keyword">new</span> VideoPlayer();
+        <span class="hljs-keyword">this</span>.imageLoader = <span class="hljs-keyword">new</span> ImageLoader();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">playMedia</span>(<span class="hljs-params">String filename, String mediaType</span>) </span>{
+        <span class="hljs-keyword">if</span> (mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"audio"</span>)) {
+            audioPlayer.playAudio(filename);
+        } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"video"</span></span>)) </span>{
+            videoPlayer.playVideo(filename);
+        } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"image"</span></span>)) </span>{
+            imageLoader.loadImage(filename);
+        } <span class="hljs-keyword">else</span> {
+            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Unsupported media type "</span> + mediaType);
+        }
+    }
+}
+</code></pre>
+            <h3 id="client">Client</h3>
+            <pre><code class="lang-java"><span class="hljs-comment">// Facade class</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">MultimediaFacade</span> {
+    <span class="hljs-keyword">private</span> AudioPlayer audioPlayer;
+    <span class="hljs-keyword">private</span> VideoPlayer videoPlayer;
+    <span class="hljs-keyword">private</span> ImageLoader imageLoader;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MultimediaFacade</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.audioPlayer = <span class="hljs-keyword">new</span> AudioPlayer();
+        <span class="hljs-keyword">this</span>.videoPlayer = <span class="hljs-keyword">new</span> VideoPlayer();
+        <span class="hljs-keyword">this</span>.imageLoader = <span class="hljs-keyword">new</span> ImageLoader();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">playMedia</span>(<span class="hljs-params">String filename, String mediaType</span>) </span>{
+        <span class="hljs-keyword">if</span> (mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"audio"</span>)) {
+            audioPlayer.playAudio(filename);
+        } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"video"</span></span>)) </span>{
+            videoPlayer.playVideo(filename);
+        } <span class="hljs-function"><span class="hljs-keyword">else</span> <span class="hljs-title">if</span> (<span class="hljs-params">mediaType.<span class="hljs-keyword">equals</span>(<span class="hljs-string">"image"</span></span>)) </span>{
+            imageLoader.loadImage(filename);
+        } <span class="hljs-keyword">else</span> {
+            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Unsupported media type "</span> + mediaType);
+        }
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>

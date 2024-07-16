@@ -1,17 +1,11 @@
 # Facade Design Pattern
 
-<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
-
-- [Facade Design Pattern](#facade-design-pattern)
-   * [Key Component of Facade Method Design Pattern](#key-component-of-facade-method-design-pattern)
-   * [Implementation](#implementation)
-      + [Subsystem Class:](#subsystem-class)
-      + [Facade Class:](#facade-class)
-      + [Client](#client)
-
-<!-- TOC end -->
-
-<!-- TOC --><a name="facade-design-pattern"></a>
+-   [Facade Design Pattern](#facade-design-pattern)
+    -   [Key Component of Facade Method Design Pattern](#key-component-of-facade-method-design-pattern)
+    -   [Implementation](#implementation)
+        -   [Subsystem Class:](#subsystem-class)
+        -   [Facade Class:](#facade-class)
+        -   [Client](#client)
 
 **Facade Method Design Pattern** is a structural design pattern that provides a simplified interface to a complex subsystem. It acts as a “front door,” concealing the internal complexity of the subsystem and making it easier for clients to interact with it.
 
@@ -19,33 +13,33 @@
 
 The functionalities of the Facade Method Design Patterns are :
 
-- It involves a single class, known as the “facade,” which provides a simplified, higher-level interface to a set of interfaces in a subsystem.
-- This simplification helps clients use the subsystem more easily without needing to understand its complexities.
+-   It involves a single class, known as the “facade,” which provides a simplified, higher-level interface to a set of interfaces in a subsystem.
+-   This simplification helps clients use the subsystem more easily without needing to understand its complexities.
 
-<!-- TOC --><a name="key-component-of-facade-method-design-pattern"></a>
 ## Key Component of Facade Method Design Pattern
 
 ![](images/key_component.png)
 
-- **Subsystem**:
-    - Represents the complex part of the system that the Facade aims to simplify.
-    Comprises multiple classes and interfaces that collaborate to provide a set of functionalities.
-    - Clients typically should not interact with the Subsystem directly, but only through the Facade.
-- **Facade**:
-    - The heart of the pattern.
-    - Acts as a simplified, unified interface to the Subsystem.
-    - Clients interact exclusively with the Facade, not with the underlying Subsystem classes.
-    - Typically has methods that delegate calls to appropriate classes within the Subsystem, hiding their complexity.
-- **Client**:
-    - Represents any code that needs to utilize the Subsystem’s functionality.
-    - Interacts solely with the Facade, unaware of the Subsystem’s internal structure.
-    - Benefits from the simplified interface provided by the Facade, making code more concise and maintainable.
+-   **Subsystem**:
+    -   Represents the complex part of the system that the Facade aims to simplify.
+        Comprises multiple classes and interfaces that collaborate to provide a set of functionalities.
+    -   Clients typically should not interact with the Subsystem directly, but only through the Facade.
+-   **Facade**:
+    -   The heart of the pattern.
+    -   Acts as a simplified, unified interface to the Subsystem.
+    -   Clients interact exclusively with the Facade, not with the underlying Subsystem classes.
+    -   Typically has methods that delegate calls to appropriate classes within the Subsystem, hiding their complexity.
+-   **Client**:
+    -   Represents any code that needs to utilize the Subsystem’s functionality.
+    -   Interacts solely with the Facade, unaware of the Subsystem’s internal structure.
+    -   Benefits from the simplified interface provided by the Facade, making code more concise and maintainable.
 
-<!-- TOC --><a name="implementation"></a>
 ## Implementation
-<!-- TOC --><a name="subsystem-class"></a>
+
 ### Subsystem Class:
+
 We have 3 complex functionalities, AudioPlayer, VideoPlayer and ImageLoader:
+
 ```java
 // AudioPlayer.java
 class AudioPlayer {
@@ -69,8 +63,8 @@ class ImageLoader {
 }
 ```
 
-<!-- TOC --><a name="facade-class"></a>
 ### Facade Class:
+
 Here Facade class is Multimedia class.
 
 ```java
@@ -100,8 +94,8 @@ class MultimediaFacade {
 }
 ```
 
-<!-- TOC --><a name="client"></a>
 ### Client
+
 ```java
 // Facade class
 class MultimediaFacade {
