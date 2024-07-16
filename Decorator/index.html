@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Decorator Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,217 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="decorator-design-pattern">Decorator Design Pattern</h1>
+            <p>
+                The Decorator Design Pattern is a structural design pattern that
+                allows behavior to be added to individual objects dynamically,
+                without affecting the behavior of other objects from the same
+                class. It involves creating a set of decorator classes that are
+                used to wrap concrete components.
+            </p>
+            <h2 id="characteristics-of-the-decorator-pattern">
+                Characteristics of the Decorator Pattern
+            </h2>
+            <ul>
+                <li>
+                    This pattern promotes flexibility and extensibility in
+                    software systems by allowing developers to compose objects
+                    with different combinations of functionalities at runtime.
+                </li>
+                <li>
+                    It follows the open/closed principle, as new decorators can
+                    be added without modifying existing code, making it a
+                    powerful tool for building modular and customizable software
+                    components.
+                </li>
+                <li>
+                    The Decorator Pattern is commonly used in scenarios where a
+                    variety of optional features or behaviors need to be added
+                    to objects in a flexible and reusable manner, such as in
+                    text formatting, graphical user interfaces, or customization
+                    of products like coffee or ice cream.
+                </li>
+            </ul>
+            <h2 id="use-cases-for-the-decorator-pattern">
+                Use Cases for the Decorator Pattern
+            </h2>
+            <ul>
+                <li>
+                    <strong>Extending Functionality</strong>: When you have a
+                    base component with basic functionality, but you need to add
+                    additional features or behaviors to it dynamically without
+                    altering its structure. Decorators allow you to add new
+                    responsibilities to objects at runtime.
+                </li>
+                <li>
+                    <strong>Multiple Combinations of Features</strong>: When you
+                    want to provide multiple combinations of features or options
+                    to an object. Decorators can be stacked and combined in
+                    different ways to create customized variations of objects,
+                    providing flexibility to users.
+                </li>
+                <li>
+                    <strong>Legacy Code Integration</strong>: When working with
+                    legacy code or third-party libraries where modifying the
+                    existing codebase is not feasible or desirable, decorators
+                    can be used to extend the functionality of existing objects
+                    without altering their implementation.
+                </li>
+                <li>
+                    <strong>GUI Components</strong>: In graphical user interface
+                    (GUI) development, decorators can be used to add additional
+                    visual effects, such as borders, shadows, or animations, to
+                    GUI components like buttons, panels, or windows.
+                </li>
+                <li>
+                    <strong>Input/Output Streams</strong>: Decorators are
+                    commonly used in input/output stream classes in languages
+                    like Java. They allow you to wrap streams with additional
+                    functionality such as buffering, compression, encryption, or
+                    logging without modifying the original stream classes.
+                </li>
+            </ul>
+            <h2 id="key-components-of-the-decorator-design-pattern">
+                Key Components of the Decorator Design Pattern
+            </h2>
+            <ul>
+                <li>
+                    <strong>Component Interface</strong>: This is an abstract
+                    class or interface that defines the common interface for
+                    both the concrete components and decorators. It specifies
+                    the operations that can be performed on the objects.
+                </li>
+                <li>
+                    <strong>Concrete Component</strong>: These are the basic
+                    objects or classes that implement the Component interface.
+                    They are the objects to which we want to add new behavior or
+                    responsibilities.
+                </li>
+                <li>
+                    <strong>Decorator</strong>: This is an abstract class that
+                    also implements the Component interface and has a reference
+                    to a Component object. Decorators are responsible for adding
+                    new behaviors to the wrapped Component object.
+                </li>
+                <li>
+                    <strong>Concrete Decorator</strong>: These are the concrete
+                    classes that extend the Decorator class. They add specific
+                    behaviors or responsibilities to the Component. Each
+                    Concrete Decorator can add one or more behaviors to the
+                    Component.
+                </li>
+            </ul>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="images/uml.png" alt="UML Decorator Pattern" /></p>
+            <h3 id="component-interface-coffee-">
+                Component Interface(Coffee)
+            </h3>
+            <p>
+                This is the interface Coffee representing the component. It
+                declares two methods <code>getDescription()</code> and
+                <code>getCost()</code> which must be implemented by concrete
+                components and decorators.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// Coffee.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Coffee</span> {
+    <span class="hljs-function">String <span class="hljs-title">getDescription</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">getCost</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+            <h3 id="concretecomponent-plaincoffee-">
+                ConcreteComponent(PlainCoffee)
+            </h3>
+            <p>
+                PlainCoffee is a concrete class implementing the Coffee
+                interface. It provides the description and cost of plain coffee
+                by implementing the <code>getDescription()</code> and
+                <code>getCost()</code> methods.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// PlainCoffee.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlainCoffee</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Coffee</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Plain Coffee"</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getCost</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2.0</span>;
+    }
+}
+</code></pre>
+            <h2 id="decorator-coffeedecorator-">Decorator(CoffeeDecorator)</h2>
+            <p>
+                CoffeeDecorator is an abstract class implementing the Coffee
+                interface. It maintains a reference to the decorated Coffee
+                object. The <code>getDescription()</code> and
+                <code>getCost()</code> methods are implemented to delegate to
+                the decorated coffee object.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// CoffeeDecorator.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CoffeeDecorator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Coffee</span> </span>{
+    <span class="hljs-keyword">protected</span> Coffee decoratedCoffee;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CoffeeDecorator</span><span class="hljs-params">(Coffee decoratedCoffee)</span> </span>{
+        <span class="hljs-keyword">this</span>.decoratedCoffee = decoratedCoffee;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function">String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">return</span> decoratedCoffee.<span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">getCost</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">return</span> decoratedCoffee.<span class="hljs-title">getCost</span><span class="hljs-params">()</span></span>;
+    }
+}
+</code></pre>
+            <h3 id="concretedecorators-milkdecorator-sugardecorator-">
+                ConcreteDecorators(MilkDecorator,SugarDecorator)
+            </h3>
+            <p>
+                MilkDecorator and SugarDecorator are concrete decorators
+                extending CoffeeDecorator. They override
+                <code>getDescription()</code> to add the respective decorator
+                description to the decorated coffee’s description. They override
+                <code>getCost()</code> to add the cost of the respective
+                decorator to the decorated coffee’s cost.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// MilkDecorator.java</span>
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MilkDecorator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CoffeeDecorator</span> </span>{
+    public <span class="hljs-type">MilkDecorator</span>(<span class="hljs-type">Coffee</span> decoratedCoffee) {
+        <span class="hljs-keyword">super</span>(decoratedCoffee);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    public <span class="hljs-type">String</span> getDescription() {
+        <span class="hljs-keyword">return</span> decoratedCoffee.getDescription() + <span class="hljs-string">", Milk"</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    public double getCost() {
+        <span class="hljs-keyword">return</span> decoratedCoffee.getCost() + <span class="hljs-number">0.5</span>;
+    }
+}
+
+<span class="hljs-comment">// SugarDecorator.java</span>
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SugarDecorator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">CoffeeDecorator</span> </span>{
+    public <span class="hljs-type">SugarDecorator</span>(<span class="hljs-type">Coffee</span> decoratedCoffee) {
+        <span class="hljs-keyword">super</span>(decoratedCoffee);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    public <span class="hljs-type">String</span> getDescription() {
+        <span class="hljs-keyword">return</span> decoratedCoffee.getDescription() + <span class="hljs-string">", Sugar"</span>;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    public double getCost() {
+        <span class="hljs-keyword">return</span> decoratedCoffee.getCost() + <span class="hljs-number">0.2</span>;
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
