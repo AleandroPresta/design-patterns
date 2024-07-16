@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Prototype Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,208 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="prototype-design-pattern">Prototype Design Pattern</h1>
+            <p>
+                The Prototype Design Pattern is a creational pattern that
+                enables the creation of new objects by copying an existing
+                object. Prototype allows us to hide the complexity of making new
+                instances from the client. The concept is to copy an existing
+                object rather than create a new instance from scratch, something
+                that may include costly operations. The existing object acts as
+                a prototype and contains the state of the object.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#components-of-prototype-design-pattern"
+                        >Components of Prototype Design Pattern</a
+                    >
+                    <ul>
+                        <li>
+                            <a href="#prototype-interface-or-abstract-class"
+                                >Prototype Interface or Abstract Class</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#concrete-prototype">Concrete Prototype</a>
+                        </li>
+                        <li><a href="#client">Client</a></li>
+                        <li><a href="#clone-method">Clone Method</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li>
+                            <a href="#prototype-interface-shape"
+                                >Prototype Interface (Shape)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#concrete-prototype-circle"
+                                >Concrete Prototype (Circle)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#client-shapeclient"
+                                >Client (ShapeClient)</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#prototypeexample">PrototypeExample</a>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="components-of-prototype-design-pattern">
+                Components of Prototype Design Pattern
+            </h2>
+            <p><img src="uml.png" alt="alt text" /></p>
+            <h3 id="prototype-interface-or-abstract-class">
+                Prototype Interface or Abstract Class
+            </h3>
+            <p>
+                The <strong>Prototype Interface</strong> or
+                <strong>Abstract Class</strong> declares the method(s) for
+                cloning an object. It defines the common interface that concrete
+                prototypes must implement, ensuring that all prototypes can be
+                cloned in a consistent manner.
+            </p>
+            <ul>
+                <li>
+                    The main role is to provide a blueprint for creating new
+                    objects by specifying the cloning contract.
+                </li>
+                <li>
+                    It declares the clone method, which concrete prototypes
+                    implement to produce copies of themselves.
+                </li>
+            </ul>
+            <h3 id="concrete-prototype">Concrete Prototype</h3>
+            <p>
+                The <strong>Concrete Prototype</strong> is a class that
+                implements the prototype interface or extends the abstract
+                class. It’s the class representing a specific type of object
+                that you want to clone.
+            </p>
+            <ul>
+                <li>
+                    It defines the details of how the cloning process should be
+                    carried out for instances of that class.
+                </li>
+                <li>
+                    Implements the clone method declared in the prototype
+                    interface, providing the cloning logic specific to the
+                    class.
+                </li>
+            </ul>
+            <h3 id="client">Client</h3>
+            <p>
+                The <strong>Client</strong> is the code or module that requests
+                the creation of new objects by interacting with the prototype.
+                It initiates the cloning process without being aware of the
+                concrete classes involved.
+            </p>
+            <h3 id="clone-method">Clone Method</h3>
+            <p>
+                The <strong>Clone Method</strong> is declared in the prototype
+                interface or abstract class. It specifies how an object should
+                be copied or cloned. Concrete prototypes implement this method
+                to define their unique cloning behavior. It Describes how the
+                object’s internal state should be duplicated to create a new,
+                independent instance.
+            </p>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="implementation_image.png" alt="alt text" /></p>
+            <h3 id="prototype-interface-shape-">Prototype Interface (Shape)</h3>
+            <p>
+                We define an interface called <code>Shape</code> that acts as
+                the prototype.It declares two methods: <code>clone()</code> for
+                making a copy of itself and <code>draw()</code> for drawing the
+                shape.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// This is like a blueprint for creating shapes.</span>
+<span class="hljs-comment">// It says every shape should be able to clone itself and draw.</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Shape</span> {
+    <span class="hljs-function">Shape <span class="hljs-title">clone</span>(<span class="hljs-params"></span>)</span>; <span class="hljs-comment">// Make a copy of itself</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span>(<span class="hljs-params"></span>)</span>; <span class="hljs-comment">// Draw the shape</span>
+}
+</code></pre>
+            <h3 id="concrete-prototype-circle">Concrete Prototype (Circle)</h3>
+            <p>
+                We implement the <code>Shape</code> interface with a concrete
+                class <code>Circle</code>. The Circle class has a private field
+                color and a constructor to set the color when creating a circle.
+                It implements the <code>clone()</code> method to create a copy
+                of itself (a new Circle with the same color).The
+                <code>draw()</code> method is implemented to print a message
+                indicating how the circle is drawn.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// This is a specific shape, a circle, implementing the Shape interface.</span>
+<span class="hljs-comment">// It can create a copy of itself (clone) and draw in its own way.</span>
+<span class="hljs-keyword">public</span> class Circle implements Shape {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">color</span>;
+
+    <span class="hljs-comment">// When you create a circle, you give it a color.</span>
+    <span class="hljs-keyword">public</span> Circle(<span class="hljs-keyword">String</span> <span class="hljs-built_in">color</span>) {
+        <span class="hljs-keyword">this</span>.<span class="hljs-built_in">color</span> = <span class="hljs-built_in">color</span>;
+    }
+
+    <span class="hljs-comment">// This creates a copy of the circle.</span>
+    @Override
+    <span class="hljs-keyword">public</span> Shape clone() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Circle(<span class="hljs-keyword">this</span>.<span class="hljs-built_in">color</span>);
+    }
+
+    <span class="hljs-comment">// This is how a circle draws itself.</span>
+    @Override
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span>() {
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Drawing a "</span> + <span class="hljs-built_in">color</span> + <span class="hljs-string">" circle."</span>);
+    }
+}
+</code></pre>
+            <h3 id="client-shapeclient">Client (ShapeClient)</h3>
+            <p>
+                We create a client class, <code>ShapeClient</code>, which will
+                use the prototype to create new shapes. The client has a field
+                <code>shapePrototype</code> representing the prototype it will
+                use. The constructor takes a <code>Shape</code> prototype, and
+                there’s a method <code>createShape()</code> that creates a new
+                shape using the prototype’s <code>clone()</code> method.
+            </p>
+            <pre><code class="lang-java"><span class="hljs-comment">// This is like a user of shapes.</span>
+<span class="hljs-comment">// It uses a prototype (a shape) to create new shapes.</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShapeClient</span> </span>{
+    <span class="hljs-keyword">private</span> Shape shapePrototype;
+
+    <span class="hljs-comment">// When you create a client, you give it a prototype (a shape).</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ShapeClient</span><span class="hljs-params">(Shape shapePrototype)</span> </span>{
+        <span class="hljs-keyword">this</span>.shapePrototype = shapePrototype;
+    }
+
+    <span class="hljs-comment">// This method creates a new shape using the prototype.</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function">Shape <span class="hljs-title">createShape</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-function"><span class="hljs-keyword">return</span> shapePrototype.<span class="hljs-title">clone</span><span class="hljs-params">()</span></span>;
+    }
+}
+</code></pre>
+            <h3 id="prototypeexample">PrototypeExample</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PrototypeExample</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(String[] args) {
+        <span class="hljs-comment">// Create a concrete prototype (a red circle).</span>
+        Shape circlePrototype = <span class="hljs-keyword">new</span> Circle(<span class="hljs-string">"red"</span>);
+
+        <span class="hljs-comment">// Create a client and give it the prototype.</span>
+        ShapeClient <span class="hljs-keyword">client</span> = <span class="hljs-keyword">new</span> ShapeClient(circlePrototype);
+
+        <span class="hljs-comment">// Use the prototype to create a new shape (a red circle).</span>
+        Shape redCircle = <span class="hljs-keyword">client</span>.createShape();
+
+        <span class="hljs-comment">// Draw the newly created red circle.</span>
+        redCircle.draw();
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
