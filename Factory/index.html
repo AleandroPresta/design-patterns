@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Factory Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,125 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="factory-pattern">Factory Pattern</h1>
+            <p>
+                The Factory Method Design Pattern is a creational design pattern
+                that provides an interface for creating objects in a superclass,
+                allowing subclasses to alter the type of objects that will be
+                created. It encapsulates object creation logic in a separate
+                method, promoting loose coupling between the creator and the
+                created objects. This pattern is particularly useful when the
+                exact types of objects to be created may vary or need to be
+                determined at runtime, enabling flexibility and extensibility in
+                object creation.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#components">Components</a>
+                    <ul>
+                        <li><a href="#creator">Creator</a></li>
+                        <li><a href="#concretecreator">ConcreteCreator</a></li>
+                        <li><a href="#product">Product</a></li>
+                        <li><a href="#concreteproduct">ConcreteProduct</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li>
+                            <a href="#product-interface">Product Interface</a>
+                        </li>
+                        <li>
+                            <a href="#concrete-products">Concrete Products</a>
+                        </li>
+                        <li>
+                            <a href="#creator-interface">Creator Interface</a>
+                        </li>
+                        <li>
+                            <a href="#concrete-creators">Concrete Creators</a>
+                        </li>
+                        <li>
+                            <a href="#client">Client</a>
+                            <h2 id="components">Components</h2>
+                            <h3 id="creator">Creator</h3>
+                            This is an abstract class or an interface that
+                            declares the factory method. The creator typically
+                            contains a method that serves as a factory for
+                            creating objects. It may also contain other methods
+                            that work with the created objects.
+                            <h3 id="concretecreator">ConcreteCreator</h3>
+                            Concrete Creator classes are subclasses of the
+                            Creator that implement the factory method to create
+                            specific types of objects. Each Concrete Creator is
+                            responsible for creating a particular product.
+                            <h3 id="product">Product</h3>
+                            This is the interface or abstract class for the
+                            objects that the factory method creates. The Product
+                            defines the common interface for all objects that
+                            the factory method can create.
+                            <h3 id="concreteproduct">ConcreteProduct</h3>
+                            Concrete Product classes are the actual objects that
+                            the factory method creates. Each Concrete Product
+                            class implements the Product interface or extends
+                            the Product abstract class.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="uml.png" alt="alt text" /></p>
+            <h3 id="product-interface">Product Interface</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Vehicle</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printVehicle</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+            <h3 id="concrete-products">Concrete Products</h3>
+            <pre><code class="lang-java">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TwoWheeler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Vehicle</span> </span>{
+    public void printVehicle() {
+        <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"I am two wheeler"</span>);
+    }
+}
+
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FourWheeler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Vehicle</span> </span>{
+    public void printVehicle() {
+        <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"I am four wheeler"</span>);
+    }
+}
+</code></pre>
+            <h3 id="creator-interface">Creator Interface</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">VehicleFactory</span> {
+    <span class="hljs-function">Vehicle <span class="hljs-title">createVehicle</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+            <h3 id="concrete-creators">Concrete Creators</h3>
+            <pre><code class="lang-java"><span class="hljs-comment">// Concrete factory class for TwoWheeler</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TwoWheelerFactory</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">VehicleFactory</span></span> </span>{
+    <span class="hljs-keyword">public</span> Vehicle createVehicle() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-type">TwoWheeler</span>();
+    }
+}
+
+<span class="hljs-comment">// Concrete factory class for FourWheeler</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FourWheelerFactory</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">VehicleFactory</span></span> </span>{
+    <span class="hljs-keyword">public</span> Vehicle createVehicle() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-type">FourWheeler</span>();
+    }
+}
+</code></pre>
+            <h3 id="client">Client</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) {
+        VehicleFactory twoWheelerFactory = <span class="hljs-keyword">new</span> <span class="hljs-type">TwoWheelerFactory</span>();
+        Vehicle twoWheeler = twoWheelerFactory.createVehicle();
+        twoWheeler.printVehicle();
+
+        VehicleFactory fourWheelerFactory = <span class="hljs-keyword">new</span> <span class="hljs-type">FourWheelerFactory</span>();
+        Vehicle fourWheeler = fourWheelerFactory.createVehicle();
+        fourWheeler.printVehicle();
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
