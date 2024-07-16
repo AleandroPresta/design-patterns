@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Singleton Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,93 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="singleton-design-pattern">Singleton Design Pattern</h1>
+            <p>
+                Singleton Pattern is probably the most widely used design
+                pattern. It is a simple pattern, easy to understand and to use.
+                It ensures a class only has one instance, and provides a global
+                point of access to it.
+            </p>
+            <h2 id="table-of-content">Table of Content</h2>
+            <ol>
+                <li><a href="#uses">Uses</a></li>
+                <li>
+                    <a href="#initialization-types-of-singleton"
+                        >Initialization Types of Singleton</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
+            </ol>
+            <h2 id="uses">Uses</h2>
+            <p>Use the Singleton method Design Pattern when:</p>
+            <ul>
+                <li>
+                    There must be exactly one instance of a class and it must be
+                    accessible to clients from a well-known access point.
+                </li>
+                <li>
+                    When the sole instance should be extensible by subclassing
+                    and clients should be able to use an extended instance
+                    without modifying
+                </li>
+                <li>
+                    Singleton classes are used for logging, driver objects,
+                    caching, and thread pool, database connections.
+                </li>
+            </ul>
+            <h2 id="initialization-types-of-singleton">
+                Initialization Types of Singleton
+            </h2>
+            <p>Singleton class can be instantiated by two methods:</p>
+            <ul>
+                <li>
+                    <strong>Early initialization</strong> : In this method,
+                    class is initialized whether it is to be used or not. The
+                    main advantage of this method is its simplicity. You
+                    initiate the class at the time of class loading. Its
+                    drawback is that class is always initialized whether it is
+                    being used or not.
+                </li>
+                <li>
+                    <strong>Lazy initialization</strong> : In this method, class
+                    in initialized only when it is required. It can save you
+                    from instantiating the class when you don’t need it.
+                    Generally, lazy initialization is used when we create a
+                    singleton class.
+                </li>
+            </ul>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="images/implementation.png" alt="alt text" /></p>
+            <pre><code class="lang-java"><span class="hljs-comment">/*package whatever //do not write package name here */</span>
+import java.io.*;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> {
+    <span class="hljs-comment">// static class</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span>(<span class="hljs-params"></span>)</span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Singleton is Instantiated."</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span>(<span class="hljs-params"></span>)
+    </span>{
+        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>)
+            instance = <span class="hljs-keyword">new</span> Singleton();
+        <span class="hljs-keyword">return</span> instance;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params"></span>)</span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Somethong is Done."</span>);
+    }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">GFG</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] args</span>)
+    </span>{
+        Singleton.getInstance().doSomething();
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
