@@ -1,1 +1,121 @@
-<h1>Prova</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adapter Design Pattern</title>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="#">Design Patterns</a>
+            </div>
+            <ul class="navbar-nav">
+                <li><a href="../">Home</a></li>
+            </ul>
+        </nav>
+        <h1 id="adapter-pattern">Adapter Pattern</h1>
+        <p>
+            The Adapter design pattern is a structural pattern that allows the
+            interface of an existing class to be used as another interface. It acts
+            as a bridge between two incompatible interfaces, making them work
+            together. This pattern involves a single class, known as the adapter,
+            which is responsible for joining functionalities of independent or
+            incompatible interfaces.
+        </p>
+        <h2 id="table-of-contents">Table of Contents</h2>
+        <ol>
+            <li>
+                <p><a href="#components">Components</a></p>
+                <ul>
+                    <li><a href="#target-interface">Target Interface</a></li>
+                    <li><a href="#adaptee">Adaptee</a></li>
+                    <li><a href="#adapter">Adapter</a></li>
+                    <li><a href="#client">Client</a></li>
+                </ul>
+            </li>
+            <li>
+                <p><a href="#implementation">Implementation</a></p>
+                <ul>
+                    <li><a href="#target-interface-printer">Target Interface (Printer)</a></li>
+                    <li><a href="#adaptee-legacyprinter">Adaptee (LegacyPrinter)</a></li>
+                    <li><a href="#adapter-printeradapter">Adapter (PrinterAdapter)</a></li>
+                    <li><a href="#client-code">Client Code</a></li>
+                </ul>
+            </li>
+        </ol>
+        <h2 id="components">Components</h2>
+        <p>
+            The objective is to make the Adaptee of the Target interface using an
+            Adapter.
+        </p>
+        <h3 id="target-interface">Target Interface</h3>
+        <p>
+            Defines the interface expected by the client. It represents the set of
+            operations that the client code can use.
+        </p>
+        <h3 id="adaptee">Adaptee</h3>
+        <p>
+            The existing class or system with an incompatible interface that needs
+            to be integrated into the new system.
+        </p>
+        <h3 id="adapter">Adapter</h3>
+        <p>
+            A class that implements the target interface and internally uses an
+            instance of the adaptee to make it compatible with the target
+            interface.
+        </p>
+        <h3 id="client">Client</h3>
+        <p>
+            The code that uses the target interface to interact with objects. It
+            remains unaware of the specific implementation details of the adaptee
+            and the adapter.
+        </p>
+        <h2 id="implementation">Implementation</h2>
+        <p><img src="implementation.png" alt="alt text" /></p>
+        <h3 id="target-interface-printer">Target Interface (Printer)</h3>
+        <pre><code class="lang-java">
+public interface Printer {
+    void print(String message);
+}
+        </code></pre>
+        <h3 id="adaptee-legacyprinter">Adaptee (LegacyPrinter)</h3>
+        <pre><code class="lang-java">
+public class LegacyPrinter {
+    public void printDocument(String message) {
+        System.out.println(message);
+    }
+}
+        </code></pre>
+        <h3 id="adapter-printeradapter">Adapter (PrinterAdapter)</h3>
+        <pre><code class="lang-java">
+public class PrinterAdapter implements Printer {
+
+    private LegacyPrinter legacyPrinter;
+
+    public PrinterAdapter(LegacyPrinter legacyPrinter) {
+        this.legacyPrinter = legacyPrinter;
+    }
+
+    @Override
+    public void print(String message) {
+        legacyPrinter.printDocument(message);
+    }
+}
+        </code></pre>
+        <h3 id="client-code">Client Code</h3>
+        <pre><code class="lang-java">
+public class Client {
+
+    public static void main(String[] args) {
+        Printer printer = new PrinterAdapter(new LegacyPrinter());
+        printer.print("Hello, World!");
+    }
+
+}
+        </code></pre>
+    </div>
+</body>
+</html>
