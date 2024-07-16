@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Builder Pattern</title>
+        <title>Observer Pattern</title>
         <link rel="stylesheet" href="../styles.css" />
         <link
             rel="stylesheet"
@@ -24,6 +24,157 @@
                     <li><a href="../">Home</a></li>
                 </ul>
             </nav>
+            <h1 id="observer-design-pattern">Observer Design Pattern</h1>
+            <p>
+                The <strong>Observer Design Pattern</strong> is a behavioral
+                design pattern that defines a one-to-many dependency between
+                objects so that when one object (the subject) changes state, all
+                its dependents (observers) are notified and updated
+                automatically.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#components-of-the-observer-pattern"
+                        >Components of the Observer Pattern</a
+                    >
+                </li>
+                <li>
+                    <a href="#observer-design-pattern-example"
+                        >Observer Design Pattern Example</a
+                    >
+                    <ul>
+                        <li><a href="#subject">Subject</a></li>
+                        <li><a href="#observer">Observer</a></li>
+                        <li><a href="#concretesubject">ConcreteSubject</a></li>
+                        <li>
+                            <a href="#concreteobserver">ConcreteObserver</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#implementation">Implementation</a>
+                    <ul>
+                        <li><a href="#subject-implementation">Subject</a></li>
+                        <li><a href="#observer-implementation">Observer</a></li>
+                        <li><a href="#weather-station">Weather Station</a></li>
+                        <li>
+                            <a href="#concrete-observers">Concrete Observers</a>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="components-of-the-observer-pattern">
+                Components of the Observer Pattern
+            </h2>
+            <h3 id="subject">Subject</h3>
+            <p>
+                The subject maintains a list of observers (subscribers or
+                listeners). It Provides methods to register and unregister
+                observers dynamically and defines a method to notify observers
+                of changes in its state.
+            </p>
+            <h3 id="observer">Observer</h3>
+            <p>
+                Observer defines an interface with an update method that
+                concrete observers must implement and ensures a common or
+                consistent way for concrete observers to receive updates from
+                the subject. Concrete observers implement this interface,
+                allowing them to react to changes in the subject’s state.
+            </p>
+            <h3 id="concretesubject">ConcreteSubject</h3>
+            <p>
+                ConcreteSubjects are specific implementations of the subject.
+                They hold the actual state or data that observers want to track.
+                When this state changes, concrete subjects notify their
+                observers. For instance, if a weather station is the subject,
+                specific weather stations in different locations would be
+                concrete subjects.
+            </p>
+            <h3 id="concreteobserver">ConcreteObserver</h3>
+            <p>
+                Concrete Observer implements the observer interface. They
+                register with a concrete subject and react when notified of a
+                state change. When the subject’s state changes, the concrete
+                observer’s update() method is invoked, allowing it to take
+                appropriate actions. In a practical example, a weather app on
+                your smartphone is a concrete observer that reacts to changes
+                from a weather station.
+            </p>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="images/image.png" alt="alt text" /></p>
+            <h3 id="subject-implementation">Subject Implementation</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Subject</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addObserver</span>(<span class="hljs-params">Observer observer</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span>(<span class="hljs-params">Observer observer</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+            <h3 id="observer-implementation">Observer Implementation</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Observer</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">update</span>(<span class="hljs-params">String weather</span>)</span>;
+}
+</code></pre>
+            <h3 id="weather-station">Weather Station</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WeatherStation</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Subject</span> </span>{
+    <span class="hljs-keyword">private</span> List&lt;Observer&gt; observers = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">private</span> String weather;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addObserver</span><span class="hljs-params">(Observer observer)</span> </span>{
+        observers.add(observer);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span><span class="hljs-params">(Observer observer)</span> </span>{
+        observers.remove(observer);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">for</span> (Observer observer : observers) {
+            observer.update(weather);
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setWeather</span><span class="hljs-params">(String newWeather)</span> </span>{
+        <span class="hljs-keyword">this</span>.weather = newWeather;
+        notifyObservers();
+    }
+}
+</code></pre>
+            <h3 id="concrete-observers">Concrete Observers</h3>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PhoneDisplay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observer</span> </span>{
+    <span class="hljs-keyword">private</span> String weather;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(String weather)</span> </span>{
+        <span class="hljs-keyword">this</span>.weather = weather;
+        display();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Phone Display: Weather updated - "</span> + weather);
+    }
+}
+</code></pre>
+            <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TVDisplay</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observer</span> </span>{
+    <span class="hljs-keyword">private</span> String weather;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(String weather)</span> </span>{
+        <span class="hljs-keyword">this</span>.weather = weather;
+        display();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"TV Display: Weather updated - "</span> + weather);
+    }
+}
+</code></pre>
         </div>
     </body>
 </html>
