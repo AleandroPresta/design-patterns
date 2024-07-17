@@ -1,27 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>_ Bridge Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>_ Bridge Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="bridge-design-pattern">Bridge Design Pattern</h1>
+            <p>
+                The bridge pattern allows the Abstraction and the Implementation
+                to be developed independently and the client code can access
+                only the Abstraction part without being concerned about the
+                Implementation part. The abstraction is an interface or abstract
+                class and the implementer is also an interface or abstract
+                class. The abstraction contains a reference to the implementer.
+                Children of the abstraction are referred to as refined
+                abstractions, and children of the implementer are concrete
+                implementers. Since we can change the reference to the
+                implementer in the abstraction, we are able to change the
+                abstraction’s implementer at run-time. Changes to the
+                implementer do not affect client code. It increases the loose
+                coupling between class abstraction and it’s implementation.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#when-we-need-bridge-design-pattern"
+                        >When we need bridge design pattern</a
+                    >
+                </li>
+                <li>
+                    <a href="#elements-of-the-bridge-design-pattern"
+                        >Elements of the Bridge Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
+            </ol>
+            <h2 id="when-we-need-bridge-design-pattern">
+                When we need bridge design pattern
+            </h2>
+            <p>
+                Suppose we have the following structure:
+                <img src="without.png" alt="alt text" />
+            </p>
+            <p>
+                If you want to change the Bus class, then you may end up
+                changing ProduceBus and AssembleBus as well and if the change is
+                workshop specific then you may need to change the Bike class as
+                well. You can solve the above problem by decoupling the Vehicle
+                and Workshop interfaces in the below manner.
+            </p>
+            <p><img src="with.png" alt="alt text" /></p>
+            <h2 id="elements-of-the-bridge-design-pattern">
+                Elements of the Bridge Design Pattern
+            </h2>
+            <ul>
+                <li>
+                    <strong>Abstraction</strong>: core of the bridge design
+                    pattern and defines the crux. Contains a reference to the
+                    implementer.
+                </li>
+                <li>
+                    <strong>Refined Abstraction</strong>: Extends the
+                    abstraction takes the finer detail one level below. Hides
+                    the finer elements from implementers.
+                </li>
+                <li>
+                    <strong>Implementer</strong>: It defines the interface for
+                    implementation classes. This interface does not need to
+                    correspond directly to the abstraction interface and can be
+                    very different. Abstraction imp provides an implementation
+                    in terms of operations provided by the Implementer
+                    interface.
+                </li>
+                <li>
+                    <strong>Concrete Implementation</strong>: Implements the
+                    above implementer by providing the concrete implementation.
+                </li>
             </ul>
-        </nav>
-        
-    </div>
-</body>
+            <pre><code class="lang-java">
+<span class="hljs-comment">// abstraction in bridge pattern</span>
+<span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Vehicle</span> </span>{
+    <span class="hljs-keyword">protected</span> Workshop workShop1;
+    <span class="hljs-keyword">protected</span> Workshop workShop2;
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">Vehicle</span><span class="hljs-params">(Workshop workShop1, Workshop workShop2)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.workShop1 = workShop1;
+        <span class="hljs-keyword">this</span>.workShop2 = workShop2;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">manufacture</span><span class="hljs-params">()</span></span>;
+}
+
+<span class="hljs-comment">// Refine abstraction 1 in bridge pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Car</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Vehicle</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Car</span><span class="hljs-params">(Workshop workShop1, Workshop workShop2)</span>
+    </span>{
+        <span class="hljs-keyword">super</span>(workShop1, workShop2);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">manufacture</span><span class="hljs-params">()</span>
+    </span>{
+        System.out.print(<span class="hljs-string">"Car "</span>);
+        workShop1.work();
+        workShop2.work();
+    }
+}
+
+<span class="hljs-comment">// Refine abstraction 2 in bridge pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bike</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Vehicle</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Bike</span><span class="hljs-params">(Workshop workShop1, Workshop workShop2)</span>
+    </span>{
+        <span class="hljs-keyword">super</span>(workShop1, workShop2);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">manufacture</span><span class="hljs-params">()</span>
+    </span>{
+        System.out.print(<span class="hljs-string">"Bike "</span>);
+        workShop1.work();
+        workShop2.work();
+    }
+}
+
+<span class="hljs-comment">// Implementer for bridge pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Workshop</span>
+</span>{
+    <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span></span>;
+}
+
+<span class="hljs-comment">// Concrete implementation 1 for bridge pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Produce</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Workshop</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span>
+    </span>{
+        System.out.print(<span class="hljs-string">"Produced"</span>);
+    }
+}
+
+<span class="hljs-comment">// Concrete implementation 2 for bridge pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Assemble</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Workshop</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">()</span>
+    </span>{
+        System.out.print(<span class="hljs-string">" And"</span>);
+        System.out.println(<span class="hljs-string">" Assembled."</span>);
+    }
+}
+
+<span class="hljs-comment">// Demonstration of bridge design pattern</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BridgePattern</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>
+    </span>{
+        Vehicle vehicle1 = <span class="hljs-keyword">new</span> Car(<span class="hljs-keyword">new</span> Produce(), <span class="hljs-keyword">new</span> Assemble());
+        vehicle1.manufacture();
+        Vehicle vehicle2 = <span class="hljs-keyword">new</span> Bike(<span class="hljs-keyword">new</span> Produce(), <span class="hljs-keyword">new</span> Assemble());
+        vehicle2.manufacture();
+    }
+}
+</code></pre>
+        </div>
+    </body>
 </html>

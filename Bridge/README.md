@@ -29,8 +29,6 @@ You can solve the above problem by decoupling the Vehicle and Workshop interface
 ## Implementation
 
 ```java
-// Java code to demonstrate
-// bridge design pattern
 
 // abstraction in bridge pattern
 abstract class Vehicle {
