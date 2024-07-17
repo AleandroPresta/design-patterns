@@ -46,7 +46,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 ### Builder Pattern
 
-![builder](/Builder/with.png)
+![builder](/Builder/uml.png)
 
 ### Composite Pattern
 
