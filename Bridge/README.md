@@ -13,8 +13,10 @@ It increases the loose coupling between class abstraction and it’s implementat
 
 Suppose we have the following structure:
 ![alt text](without.png)
+
 If you want to change the Bus class, then you may end up changing ProduceBus and AssembleBus as well and if the change is workshop specific then you may need to change the Bike class as well.
 You can solve the above problem by decoupling the Vehicle and Workshop interfaces in the below manner.
+
 ![alt text](with.png)
 
 ## Elements of the Bridge Design Pattern
