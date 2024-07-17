@@ -42,7 +42,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 ### Bridge Pattern
 
-![bridge](/Bridge/implementation.png)
+![bridge](/Bridge/uml.png)
 
 ### Builder Pattern
 
