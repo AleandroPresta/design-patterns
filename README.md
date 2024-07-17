@@ -8,6 +8,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 <ul>
     <li><a href="./Adapter/">Adapter Pattern</a></li>
+    <li><a href="./Bridge/">Bridge Pattern</a></li>
     <li><a href="./Builder/">Builder Pattern</a></li>
     <li><a href="./Composite/">Composite Pattern</a></li>
     <li><a href="./Decorator/">Decorator Pattern</a></li>
@@ -24,6 +25,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### UMLs Index
 
 -   [Adapter Pattern](#adapter-pattern)
+-   [Bridge Pattern](#bridge-pattern)
 -   [Builder Pattern](#builder-pattern)
 -   [Composite Pattern](#composite-pattern)
 -   [Decorator Pattern](#decorator-pattern)
@@ -38,9 +40,13 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 ![adapter](/Adapter/implementation.png)
 
+### Bridge Pattern
+
+![bridge](/Bridge/implementation.png)
+
 ### Builder Pattern
 
-![builder](/Builder/uml.png)
+![builder](/Builder/with.png)
 
 ### Composite Pattern
 
