@@ -5,6 +5,7 @@ The **Proxy Design Pattern** is a structural design pattern that provides a surr
 ## Table of Contents
 
 1. [Components of Proxy Design Pattern](#components-of-proxy-design-pattern)
+2. [Implementation](#implementation)
 
 ## Components of Proxy Design Pattern
 

@@ -16,6 +16,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Factory/">Factory Pattern</a></li>
     <li><a href="./Observer/">Observer Pattern</a></li>
     <li><a href="./Prototype/">Prototype Pattern</a></li>
+    <li><a href="./Proxy/">Proxy Pattern</a></li>
     <li><a href="./Singleton">Singleton Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
 </ul>
@@ -33,6 +34,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Factory Pattern](#factory-pattern)
 -   [Observer Pattern](#observer-pattern)
 -   [Prototype Pattern](#prototype-pattern)
+-   [Proxy Pattern](#proxy-pattern)
 -   [Singleton Pattern](#singleton-pattern)
 -   [Strategy Pattern](#strategy-pattern)
 
@@ -71,6 +73,10 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Prototype Pattern
 
 ![prototype](/Prototype/uml.png)
+
+## Proxy Pattern
+
+![proxy](/Proxy/uml.png)
 
 ### Singleton Pattern
 
