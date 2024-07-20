@@ -1,26 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Proxy Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
-            </ul>
-        </nav>
-    </div>
-</body>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="proxy-design-pattern">Proxy Design Pattern</h1>
+            <p>
+                The <strong>Proxy Design Pattern</strong> is a structural design
+                pattern that provides a surrogate or placeholder for another
+                object to control access to it. This pattern is useful when you
+                want to add an extra layer of control over access to an object.
+                The proxy acts as an intermediary, controlling access to the
+                real object.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ol>
+                <li>
+                    <a href="#components-of-proxy-design-pattern"
+                        >Components of Proxy Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
+            </ol>
+            <h2 id="components-of-proxy-design-pattern">
+                Components of Proxy Design Pattern
+            </h2>
+            <ol>
+                <li>
+                    Subject
+                    <ul>
+                        <li>
+                            The Subject is an interface or an abstract class
+                            that defines the common interface shared by the
+                            RealSubject and Proxy classes. It declares the
+                            methods that the Proxy uses to control access to the
+                            RealSubject.
+                        </li>
+                        <li>
+                            Declares the common interface for both RealSubject
+                            and Proxy.
+                        </li>
+                        <li>
+                            Usually includes the methods that the client code
+                            can invoke on the RealSubject and the Proxy.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    RealSubject
+                    <ul>
+                        <li>
+                            The RealSubject is the actual object that the Proxy
+                            represents. It contains the real implementation of
+                            the business logic or the resource that the client
+                            code wants to access.
+                        </li>
+                        <li>
+                            It Implements the operations declared by the Subject
+                            interface.
+                        </li>
+                        <li>
+                            Represents the real resource or object that the
+                            Proxy controls access to. 3. Proxy
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>The Proxy:</p>
+                    <ul>
+                        <li>
+                            <p>
+                                Acts as a surrogate or placeholder for the
+                                RealSubject. It controls access to the real
+                                object and may provide additional functionality
+                                such as lazy loading, access control, or
+                                logging.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Implements the same interface as the RealSubject
+                                (Subject).
+                            </p>
+                        </li>
+                        <li>Maintains a reference to the RealSubject.</li>
+                        <li>
+                            Controls access to the RealSubject, adding
+                            additional logic if necessary.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h3 id="implementation">Implementation</h3>
+            <p><img src="uml.png" alt="alt text" /></p>
+            <ol>
+                <li>
+                    <p>
+                        Subject (Image Interface): The Image interface declares
+                        the common methods for displaying images, acting as a
+                        blueprint for both the real and proxy objects. In this
+                        design, it defines the display() method that both
+                        RealImage and ProxyImage must implement. This ensures a
+                        uniform interface for clients interacting with image
+                        objects.
+                    </p>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Subject</span>
+<span class="hljs-keyword">interface</span> <span class="hljs-title">Image</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        RealSubject (RealImage Class): The RealImage class
+                        represents the real object that the proxy will control
+                        access to.
+                    </p>
+                    <ul>
+                        <li>
+                            It implements the Image interface, providing
+                            concrete implementations for loading and displaying
+                            images from disk.
+                        </li>
+                        <li>
+                            The constructor initializes the image file name, and
+                            the display() method is responsible for loading the
+                            image if not already loaded and then displaying it.
+                        </li>
+                    </ul>
+                    <pre><code class="lang-java"><span class="hljs-comment">// RealSubject</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title">RealImage</span> <span class="hljs-title">implements</span> <span class="hljs-title">Image</span> {
+    <span class="hljs-keyword">private</span> String filename;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RealImage</span>(<span class="hljs-params">String filename</span>) </span>{
+        <span class="hljs-keyword">this</span>.filename = filename;
+        loadImageFromDisk();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">loadImageFromDisk</span>(<span class="hljs-params"></span>) </span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Loading image: "</span> + filename);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">display</span>(<span class="hljs-params"></span>) </span>{
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Displaying image: "</span> + filename);
+    }
+}
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        Proxy (ProxyImage Class): The ProxyImage class acts as a
+                        surrogate for the RealImage. It also implements the
+                        Image interface, maintaining a reference to the real
+                        image object.
+                    </p>
+                    <ul>
+                        <li>
+                            The display() method in the proxy checks whether the
+                            real image has been loaded; if not, it creates a new
+                            instance of RealImage and delegates the display()
+                            call to it.
+                        </li>
+                        <li>
+                            This lazy loading mechanism ensures that the real
+                            image is loaded only when necessary.
+                        </li>
+                    </ul>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Proxy</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProxyImage</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Image</span></span> </span>{
+    <span class="hljs-keyword">private</span> Image realImage;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> filename;
+
+    <span class="hljs-keyword">public</span> ProxyImage(<span class="hljs-keyword">String</span> filename) {
+        <span class="hljs-built_in">this</span>.filename = filename;
+    }
+
+    <span class="hljs-keyword">public</span> void display() {
+        <span class="hljs-keyword">if</span> (realImage == <span class="hljs-literal">null</span>) {
+            realImage = <span class="hljs-keyword">new</span> <span class="hljs-type">RealImage</span>(filename);
+        }
+        realImage.display();
+    }
+}
+</code></pre>
+                    <ol>
+                        <li>Client:</li>
+                    </ol>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Client code</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> ProxyPatternExample {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span>[] args) {
+        Image <span class="hljs-built_in">image</span> = <span class="hljs-keyword">new</span> ProxyImage(<span class="hljs-string">"example.jpg"</span>);
+
+        <span class="hljs-comment">// Image will be loaded from disk only when display() is called</span>
+        <span class="hljs-built_in">image</span>.<span class="hljs-built_in">display</span>();
+
+        <span class="hljs-comment">// Image will not be loaded again, as it has been cached in the Proxy</span>
+        <span class="hljs-built_in">image</span>.<span class="hljs-built_in">display</span>();
+    }
+}
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </body>
 </html>
