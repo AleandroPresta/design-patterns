@@ -75,7 +75,7 @@ The **Proxy Design Pattern** is a structural design pattern that provides a surr
     ```java
     // Proxy
     class ProxyImage implements Image {
-        private RealImage realImage;
+        private Image realImage;
         private String filename;
 
         public ProxyImage(String filename) {

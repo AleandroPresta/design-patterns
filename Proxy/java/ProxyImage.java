@@ -1,7 +1,7 @@
 package Proxy.java;
 
 class ProxyImage implements Image {
-    private RealImage realImage;
+    private Image realImage;
     private String filename;
 
     public ProxyImage(String filename) {
