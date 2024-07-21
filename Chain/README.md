@@ -36,7 +36,7 @@ The Chain of Responsibility Pattern consists of the following key components:
 
 ![alt text](uml.png)
 
-1. Request
+### Request
 
 ```java
 enum Priority {
@@ -56,8 +56,9 @@ class Request {
 }
 ```
 
-2. Handler Interface
-   Defines the interface for handling requests. Includes methods for handling requests (`handleRequest()`) and setting the next handler in the chain (setNextHandler()).
+### Handler Interface
+
+Defines the interface for handling requests. Includes methods for handling requests (`handleRequest()`) and setting the next handler in the chain (setNextHandler()).
 
 ```java
 public interface SupportHandler {
@@ -66,8 +67,9 @@ public interface SupportHandler {
 }
 ```
 
-3. Concrete Handlers
-   Implement the `SupportHandler` interface. Each handler is responsible for handling requests based on its assigned priority level. If a handler can handle the request, it processes it; otherwise, it passes the request to the next handler in the chain.
+### Concrete Handlers
+
+Implement the `SupportHandler` interface. Each handler is responsible for handling requests based on its assigned priority level. If a handler can handle the request, it processes it; otherwise, it passes the request to the next handler in the chain.
 
 ```java
 public class Level1SupportHandler implements SupportHandler {
@@ -117,7 +119,7 @@ public class Level3SupportHandler implements SupportHandler {
 }
 ```
 
-4. Client
+### Client
 
 ```java
 // Main Class
