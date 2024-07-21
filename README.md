@@ -54,7 +54,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 ### Chain of Responsability
 
-![chain](/Chain%20of%20Responsability/uml.png)
+![chain](/Chain/uml.png)
 
 ### Composite Pattern
 
