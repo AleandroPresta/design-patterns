@@ -11,6 +11,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Bridge/">Bridge Pattern</a></li>
     <li><a href="./Builder/">Builder Pattern</a></li>
     <li><a href="./Composite/">Composite Pattern</a></li>
+    <li><a href="./Chain of Responsability/">Chain of Responsability</a></li>
     <li><a href="./Decorator/">Decorator Pattern</a></li>
     <li><a href="./Facade/">Facade Pattern</a></li>
     <li><a href="./Factory/">Factory Pattern</a></li>
@@ -28,6 +29,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Adapter Pattern](#adapter-pattern)
 -   [Bridge Pattern](#bridge-pattern)
 -   [Builder Pattern](#builder-pattern)
+-   [Chain of Responsability](#chain-of-responsability)
 -   [Composite Pattern](#composite-pattern)
 -   [Decorator Pattern](#decorator-pattern)
 -   [Facade Pattern](#facade-pattern)
@@ -49,6 +51,10 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Builder Pattern
 
 ![builder](/Builder/uml.png)
+
+### Chain of Responsability
+
+![chain](/Chain%20of%20Responsability/uml.png)
 
 ### Composite Pattern
 
