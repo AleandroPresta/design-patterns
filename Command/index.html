@@ -96,6 +96,208 @@
                     </p>
                 </li>
             </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="/Command/uml.png" alt="uml" /></p>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Command Interface</strong>: The Command
+                        interface declares a method, often named
+                        <code>execute()</code>. This method is meant to
+                        encapsulate a specific operation. The interface sets a
+                        contract for concrete command classes, defining the
+                        <code>execute()</code> method that encapsulates the
+                        operation to be performed.
+                    </p>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Command interface</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Command</span> {
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">execute</span>(<span class="hljs-params"></span>)</span>;
+}
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong>Concrete Command Classes</strong>: Concrete
+                        command classes implement the Command interface. Each
+                        class encapsulates a specific operation related to
+                        devices. Each concrete command class provides a specific
+                        implementation of the <code>execute()</code> method,
+                        defining how a particular device operation (turning on,
+                        turning off, adjusting volume, changing channel) is
+                        executed.
+                    </p>
+                    <pre><code class="lang-java">
+<span class="hljs-comment">// Concrete command for turning a device on</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TurnOnCommand</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Command</span> </span>{
+<span class="hljs-keyword">private</span> Device device;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TurnOnCommand</span><span class="hljs-params">(Device device)</span> </span>{
+        <span class="hljs-keyword">this</span>.device = device;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+        device.turnOn();
+    }
+
+}
+
+<span class="hljs-comment">// Concrete command for turning a device off</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TurnOffCommand</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Command</span> </span>{
+<span class="hljs-keyword">private</span> Device device;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TurnOffCommand</span><span class="hljs-params">(Device device)</span> </span>{
+        <span class="hljs-keyword">this</span>.device = device;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+        device.turnOff();
+    }
+
+}
+
+<span class="hljs-comment">// Concrete command for adjusting the volume of a stereo</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AdjustVolumeCommand</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Command</span> </span>{
+<span class="hljs-keyword">private</span> Stereo stereo;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AdjustVolumeCommand</span><span class="hljs-params">(Stereo stereo)</span> </span>{
+        <span class="hljs-keyword">this</span>.stereo = stereo;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+        stereo.adjustVolume();
+    }
+
+}
+
+<span class="hljs-comment">// Concrete command for changing the channel of a TV</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChangeChannelCommand</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Command</span> </span>{
+<span class="hljs-keyword">private</span> TV tv;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChangeChannelCommand</span><span class="hljs-params">(TV tv)</span> </span>{
+        <span class="hljs-keyword">this</span>.tv = tv;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+        tv.changeChannel();
+    }
+
+}
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong>Receiver Classes (Devices)</strong>: The Device
+                        interface declares methods related to device
+                        functionality, such as <code>turnOn()</code> and
+                        <code>turnOff()</code>. This interface sets a contract
+                        for device classes, defining common operations that
+                        concrete devices should support.
+                    </p>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Receiver interface</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Device</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">turnOn</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">turnOff</span><span class="hljs-params">()</span></span>;
+}
+
+<span class="hljs-comment">// Concrete receiver for a TV</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TV</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Device</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">turnOn</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"TV is now on"</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">turnOff</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"TV is now off"</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">changeChannel</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Channel changed"</span>);
+    }
+}
+
+<span class="hljs-comment">// Concrete receiver for a stereo</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stereo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Device</span> </span>{
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">turnOn</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Stereo is now on"</span>);
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">turnOff</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Stereo is now off"</span>);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">adjustVolume</span><span class="hljs-params">()</span> </span>{
+        System.out.println(<span class="hljs-string">"Volume adjusted"</span>);
+    }
+}
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong>Invoker Class (Remote Control)</strong>: The
+                        invoker class holds a reference to a Command object and
+                        triggers its execution through the
+                        <code>execute()</code> method. The invoker doesn’t know
+                        the specific details of the command or the devices. It
+                        simply calls the <code>execute()</code> method on the
+                        current command, allowing for flexible and dynamic
+                        control over different devices.
+                    </p>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Invoker</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">RemoteControl</span> {
+    <span class="hljs-keyword">private</span> Command command;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCommand</span>(<span class="hljs-params">Command command</span>) </span>{
+        <span class="hljs-keyword">this</span>.command = command;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pressButton</span>(<span class="hljs-params"></span>) </span>{
+        command.execute();
+    }
+}
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Client</strong>:</p>
+                    <pre><code class="lang-java"><span class="hljs-comment">// Example usage</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>{
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) {
+            <span class="hljs-comment">// Create devices</span>
+            TV tv = <span class="hljs-keyword">new</span> <span class="hljs-type">TV</span>();
+            Stereo stereo = <span class="hljs-keyword">new</span> <span class="hljs-type">Stereo</span>();
+
+            <span class="hljs-comment">// Create command objects</span>
+            Command turnOnTVCommand = <span class="hljs-keyword">new</span> <span class="hljs-type">TurnOnCommand</span>(tv);
+            Command turnOffTVCommand = <span class="hljs-keyword">new</span> <span class="hljs-type">TurnOffCommand</span>(tv);
+            Command adjustVolumeStereoCommand = <span class="hljs-keyword">new</span> <span class="hljs-type">AdjustVolumeCommand</span>(stereo);
+            Command changeChannelTVCommand = <span class="hljs-keyword">new</span> <span class="hljs-type">ChangeChannelCommand</span>(tv);
+
+            <span class="hljs-comment">// Create remote control</span>
+            RemoteControl remote = <span class="hljs-keyword">new</span> <span class="hljs-type">RemoteControl</span>();
+
+            <span class="hljs-comment">// Set and execute commands</span>
+            remote.setCommand(turnOnTVCommand);
+            remote.pressButton(); <span class="hljs-comment">// Outputs: TV is now on</span>
+
+            remote.setCommand(adjustVolumeStereoCommand);
+            remote.pressButton(); <span class="hljs-comment">// Outputs: Volume adjusted</span>
+
+            remote.setCommand(changeChannelTVCommand);
+            remote.pressButton(); <span class="hljs-comment">// Outputs: Channel changed</span>
+
+            remote.setCommand(turnOffTVCommand);
+            remote.pressButton(); <span class="hljs-comment">// Outputs: TV is now off</span>
+        }
+    }
+</code></pre>
+                </li>
+            </ol>
         </div>
     </body>
 </html>
