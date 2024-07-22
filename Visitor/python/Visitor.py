@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 
 '''
-    Visitable interface and elements
+    Visitable interface and its implementations
 '''
 class ItemElement(ABC):
     @abstractmethod
