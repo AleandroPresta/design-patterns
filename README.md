@@ -20,6 +20,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Prototype/">Prototype Pattern</a></li>
     <li><a href="./Proxy/">Proxy Pattern</a></li>
     <li><a href="./Singleton">Singleton Pattern</a></li>
+    <li><a href="/State/">State Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
     <li><a href="./Visitor/">Visitor Pattern</a></li>
 </ul>
@@ -41,6 +42,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Prototype Pattern](#prototype-pattern)
 -   [Proxy Pattern](#proxy-pattern)
 -   [Singleton Pattern](#singleton-pattern)
+-   [State Pattern](#state-pattern)
 -   [Strategy Pattern](#strategy-pattern)
 -   [Visitor Pattern](#visitor-pattern)
 
@@ -95,6 +97,10 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Singleton Pattern
 
 ![singleton](/Singleton/images/implementation.png)
+
+### State Pattern
+
+![state](/State/uml.png)
 
 ### Strategy Pattern
 
