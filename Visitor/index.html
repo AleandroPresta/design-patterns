@@ -1,26 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visitor Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Visitor Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="visitor-design-pattern">Visitor Design Pattern</h1>
+            <p>
+                Visitor design pattern is one of the behavioral design patterns.
+                It is used when we have to perform an operation on a group of
+                similar kind of Objects. With the help of visitor pattern, we
+                can move the operational logic from the objects to another
+                class. The visitor pattern consists of two parts:
+            </p>
+            <ul>
+                <li>
+                    a method called <code>visit()</code> which is implemented by
+                    the visitor and is called for every element in the data
+                    structure
+                </li>
+                <li>
+                    visitable classes providing <code>accept()</code> methods
+                    that accept a visitor
+                </li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li><a href="#components">Components</a></li>
+                <li><a href="#implementation">Implementation</a></li>
+            </ul>
+            <h2 id="components">Components</h2>
+            <ul>
+                <li>
+                    <strong>Client</strong> : The Client class is a consumer of
+                    the classes of the visitor design pattern. It has access to
+                    the data structure objects and can instruct them to accept a
+                    Visitor to perform the appropriate processing.
+                </li>
+                <li>
+                    <strong>Visitor</strong> : This is an interface or an
+                    abstract class used to declare the visit operations for all
+                    the types of visitable classes.
+                </li>
+                <li>
+                    <strong>ConcreteVisitor</strong> : For each type of visitor
+                    all the visit methods, declared in abstract visitor, must be
+                    implemented. Each Visitor will be responsible for different
+                    operations.
+                </li>
+                <li>
+                    <strong>Visitable</strong> : This is an interface which
+                    declares the accept operation. This is the entry point which
+                    enables an object to be “visited” by the visitor object.
+                </li>
+                <li>
+                    <strong>ConcreteVisitable</strong> : These classes implement
+                    the Visitable interface or class and defines the accept
+                    operation. The visitor object is passed to this object using
+                    the accept operation.
+                </li>
+            </ul>
+        </div>
+    </body>
 </html>
