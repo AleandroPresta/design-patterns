@@ -20,6 +20,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Proxy/">Proxy Pattern</a></li>
     <li><a href="./Singleton">Singleton Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
+    <li><a href="./Visitor/">Visitor Pattern</a></li>
 </ul>
 
 ## UMLs
@@ -39,6 +40,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Proxy Pattern](#proxy-pattern)
 -   [Singleton Pattern](#singleton-pattern)
 -   [Strategy Pattern](#strategy-pattern)
+-   [Visitor](#visitor-pattern)
 
 ### Adapter Pattern
 
@@ -91,3 +93,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Strategy Pattern
 
 ![strategy](/Strategy/images/uml.png)
+
+### Visitor Pattern
+
+![visitor](/Visitor/uml.png)
