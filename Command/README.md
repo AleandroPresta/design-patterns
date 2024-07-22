@@ -22,3 +22,22 @@ The Command Design Pattern is a behavioral design pattern that turns a request i
    The Receiver is the device that knows how to perform the actual operation associated with a command. It could be a TV, stereo, or any other device. Receivers understand the specific tasks mentioned in commands. If a command says, “turn on,” the Receiver (device) knows precisely how to execute that action. The Receiver-Command relationship separates responsibilities, making it easy to add new devices or commands without messing with existing functionality.
 
 ## Implementation
+
+![uml](/Command/uml.png)
+
+1. **Command Interface**:
+   The Command interface declares a method, often named `execute()`. This method is meant to encapsulate a specific operation. The interface sets a contract for concrete command classes, defining the `execute()` method that encapsulates the operation to be performed.
+
+    ```java
+    // Command interface
+    public interface Command {
+        void execute();
+    }
+    ```
+
+2. **Concrete Command Classes**:
+   Concrete command classes implement the Command interface. Each class encapsulates a specific operation related to devices. Each concrete command class provides a specific implementation of the `execute()` method, defining how a particular device operation (turning on, turning off, adjusting volume, changing channel) is executed.
+
+    ```java
+
+    ```
