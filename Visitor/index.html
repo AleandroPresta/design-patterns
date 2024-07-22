@@ -79,6 +79,152 @@
                     the accept operation.
                 </li>
             </ul>
+            <h2 id="implementation">Implementation</h2>
+            <ul>
+                <li><strong>Visitor</strong>:</li>
+            </ul>
+            <pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ShoppingCartVisitor</span> {
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">visit</span>(<span class="hljs-params">Book book</span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">visit</span>(<span class="hljs-params">Fruit fruit</span>)</span>;
+}
+</code></pre>
+            <ul>
+                <li><strong>ConcreteVisitor</strong>:</li>
+            </ul>
+            <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShoppingCartVisitorImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ShoppingCartVisitor</span>
+</span>{
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">visit</span><span class="hljs-params">(Book book)</span>
+    </span>{
+        <span class="hljs-keyword">int</span> cost=<span class="hljs-number">0</span>;
+        <span class="hljs-comment">//apply 5$ discount if book price is greater than 50</span>
+        <span class="hljs-keyword">if</span>(book.getPrice() &gt; <span class="hljs-number">50</span>)
+        {
+            cost = book.getPrice()-<span class="hljs-number">5</span>;
+        }
+        <span class="hljs-keyword">else</span>
+            cost = book.getPrice();
+
+        System.out.println(<span class="hljs-string">"Book ISBN::"</span>+book.getIsbnNumber() + <span class="hljs-string">" cost ="</span>+cost);
+        <span class="hljs-keyword">return</span> cost;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">visit</span><span class="hljs-params">(Fruit fruit)</span>
+    </span>{
+        <span class="hljs-keyword">int</span> cost = fruit.getPricePerKg()*fruit.getWeight();
+        System.out.println(fruit.getName() + <span class="hljs-string">" cost = "</span>+cost);
+        <span class="hljs-keyword">return</span> cost;
+    }
+
+}
+</code></pre>
+            <ul>
+                <li><strong>Visitable</strong>:</li>
+            </ul>
+            <pre><code class="lang-java"><span class="hljs-keyword">interface</span> <span class="hljs-title">ItemElement</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">accept</span>(<span class="hljs-params">ShoppingCartVisitor visitor</span>)</span>;
+}
+</code></pre>
+            <ul>
+                <li><strong>ConcreteVisitable</strong>:</li>
+            </ul>
+            <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Book</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ItemElement</span>
+</span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> price;
+    <span class="hljs-keyword">private</span> String isbnNumber;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Book</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cost, String isbn)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.price=cost;
+        <span class="hljs-keyword">this</span>.isbnNumber=isbn;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getPrice</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> price;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function">String <span class="hljs-title">getIsbnNumber</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> isbnNumber;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">accept</span><span class="hljs-params">(ShoppingCartVisitor visitor)</span>
+    </span>{
+        <span class="hljs-function"><span class="hljs-keyword">return</span> visitor.<span class="hljs-title">visit</span><span class="hljs-params">(<span class="hljs-keyword">this</span>)</span></span>;
+    }
+
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fruit</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ItemElement</span>
+</span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> pricePerKg;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> weight;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Fruit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> priceKg, <span class="hljs-keyword">int</span> wt, String nm)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.pricePerKg=priceKg;
+        <span class="hljs-keyword">this</span>.weight=wt;
+        <span class="hljs-keyword">this</span>.name = nm;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getPricePerKg</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> pricePerKg;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getWeight</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> weight;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-function">String <span class="hljs-title">getName</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;
+    }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">accept</span><span class="hljs-params">(ShoppingCartVisitor visitor)</span>
+    </span>{
+        <span class="hljs-function"><span class="hljs-keyword">return</span> visitor.<span class="hljs-title">visit</span><span class="hljs-params">(<span class="hljs-keyword">this</span>)</span></span>;
+    }
+
+}
+</code></pre>
+            <ul>
+                <li><strong>Client</strong>:</li>
+            </ul>
+            <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ShoppingCartClient</span>
+</span>{
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(String[] args)
+    {
+        ItemElement[] items = <span class="hljs-keyword">new</span> ItemElement[]{<span class="hljs-keyword">new</span> Book(<span class="hljs-number">20</span>, <span class="hljs-string">"1234"</span>),
+                              <span class="hljs-keyword">new</span> Book(<span class="hljs-number">100</span>, <span class="hljs-string">"5678"</span>), <span class="hljs-keyword">new</span> Fruit(<span class="hljs-number">10</span>, <span class="hljs-number">2</span>, <span class="hljs-string">"Banana"</span>),
+                              <span class="hljs-keyword">new</span> Fruit(<span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-string">"Apple"</span>)};
+
+        <span class="hljs-keyword">int</span> total = calculatePrice(items);
+        System.out.println(<span class="hljs-string">"Total Cost = "</span>+total);
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> calculatePrice(ItemElement[] items)
+    {
+        ShoppingCartVisitor visitor = <span class="hljs-keyword">new</span> ShoppingCartVisitorImpl();
+        <span class="hljs-keyword">int</span> <span class="hljs-keyword">sum</span>=<span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(ItemElement item : items)
+        {
+            <span class="hljs-keyword">sum</span> = <span class="hljs-keyword">sum</span> + item.accept(visitor);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">sum</span>;
+    }
+
+}
+</code></pre>
         </div>
     </body>
 </html>
