@@ -1,26 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>State Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="state-design-pattern">State Design Pattern</h1>
+            <p>
+                The State design pattern is a behavioral software design pattern
+                that allows an object to alter its behavior when its internal
+                state changes. It achieves this by encapsulating the object’s
+                behavior within different state objects, and the object itself
+                dynamically switches between these state objects depending on
+                its current state.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li>
+                    <a href="#components-of-state-design-pattern"
+                        >Components of State Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-state-design-pattern">
+                Components of State Design Pattern
+            </h2>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Context</strong>: The Context is the class that
+                        contains the object whose behavior changes based on its
+                        internal state. It maintains a reference to the current
+                        state object that represents the current state of the
+                        Context. The Context provides an interface for clients
+                        to interact with and typically delegates state-specific
+                        behavior to the current state object.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>State Interface or Base Class</strong>: The
+                        State interface or base class defines a common interface
+                        for all concrete state classes. This interface typically
+                        declares methods that represent the state-specific
+                        behavior that the Context can exhibit. It allows the
+                        Context to interact with state objects without knowing
+                        their concrete types.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Concrete States</strong>: Concrete state classes
+                        implement the State interface or extend the base class.
+                        Each concrete state class encapsulates the behavior
+                        associated with a specific state of the Context. These
+                        classes define how the Context behaves when it is in
+                        their respective states.
+                    </p>
+                </li>
+            </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="uml.png" alt="uml" /></p>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Context(VendingMachineContext)</strong>: The
+                        context is responsible for maintaining the current state
+                        of the vending machine and delegating state-specific
+                        behavior to the appropriate state object.
+                    </p>
+                    <pre><code class="lang-java">  public class VendingMachineContext {
+      private VendingMachineState <span class="hljs-keyword">state</span>;
+
+      public void <span class="hljs-built_in">set</span>State(VendingMachineState <span class="hljs-keyword">state</span>) {
+          this.<span class="hljs-keyword">state</span> = <span class="hljs-keyword">state</span>;
+      }
+
+      public void request() {
+          <span class="hljs-keyword">state</span>.handleRequest();
+      }
+  }
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong>State Interface (VendingMachineState)</strong>:
+                        This interface defines the contract that all concrete
+                        state classes must implement. It typically contains a
+                        method or methods representing the behavior associated
+                        with each state of the vending machine.
+                    </p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">VendingMachineState</span> {
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span>(<span class="hljs-params"></span>)</span>;
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong
+                            >Concrete States (Specific Vending Machine
+                            States)</strong
+                        >: Concrete state classes represent specific states of
+                        the vending machine, such as “ReadyState,”
+                        “ProductSelectedState,” and “OutOfStockState.” Each
+                        concrete state class implements the behavior associated
+                        with its respective state, like allowing product
+                        selection, processing payment, or displaying an
+                        out-of-stock message.
+                    </p>
+                    <pre><code class="lang-java">  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReadyState</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">VendingMachineState</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>{
+          System.out.println(<span class="hljs-string">"Ready state: Please select a product."</span>);
+      }
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProductSelectedState</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">VendingMachineState</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>{
+          System.out.println(<span class="hljs-string">"Product selected state: Processing payment."</span>);
+      }
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PaymentPendingState</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">VendingMachineState</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>{
+          System.out.println(<span class="hljs-string">"Payment pending state: Dispensing product."</span>);
+      }
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutOfStockState</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">VendingMachineState</span> </span>{
+      <span class="hljs-meta">@Override</span>
+      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleRequest</span><span class="hljs-params">()</span> </span>{
+          System.out.println(<span class="hljs-string">"Out of stock state: Product unavailable."</span>);
+      }
+  }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Client</strong>:</p>
+                    <pre><code class="lang-java"> public class Main {
+     public static void main(String[] args) {
+         // Create context
+         VendingMachineContext vendingMachine = new VendingMachineContext();
+
+         // Set initial <span class="hljs-keyword">state</span>
+         vendingMachine.<span class="hljs-built_in">set</span>State(new ReadyState());
+
+         // Request <span class="hljs-keyword">state</span> change
+         vendingMachine.request();
+
+         // Change <span class="hljs-keyword">state</span>
+         vendingMachine.<span class="hljs-built_in">set</span>State(new ProductSelectedState());
+
+         // Request <span class="hljs-keyword">state</span> change
+         vendingMachine.request();
+
+         // Change <span class="hljs-keyword">state</span>
+         vendingMachine.<span class="hljs-built_in">set</span>State(new PaymentPendingState());
+
+         // Request <span class="hljs-keyword">state</span> change
+         vendingMachine.request();
+
+         // Change <span class="hljs-keyword">state</span>
+         vendingMachine.<span class="hljs-built_in">set</span>State(new OutOfStockState());
+
+         // Request <span class="hljs-keyword">state</span> change
+         vendingMachine.request();
+     }
+ }
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </body>
 </html>
