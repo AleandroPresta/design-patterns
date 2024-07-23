@@ -16,6 +16,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Decorator/">Decorator Pattern</a></li>
     <li><a href="./Facade/">Facade Pattern</a></li>
     <li><a href="./Factory/">Factory Pattern</a></li>
+    <li><a href="./Flyweight/">Flyweight Pattern</a></li>
     <li><a href="./Observer/">Observer Pattern</a></li>
     <li><a href="./Prototype/">Prototype Pattern</a></li>
     <li><a href="./Proxy/">Proxy Pattern</a></li>
@@ -38,6 +39,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Decorator Pattern](#decorator-pattern)
 -   [Facade Pattern](#facade-pattern)
 -   [Factory Pattern](#factory-pattern)
+-   [Flyweight Pattern](#flyweight-pattern)
 -   [Observer Pattern](#observer-pattern)
 -   [Prototype Pattern](#prototype-pattern)
 -   [Proxy Pattern](#proxy-pattern)
@@ -81,6 +83,10 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Factory Pattern
 
 ![factory](/Factory/uml.png)
+
+### Flyweight Pattern
+
+![flyweight](/Flyweight/uml.png)
 
 ### Observer Pattern
 
