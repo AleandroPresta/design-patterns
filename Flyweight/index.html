@@ -1,26 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flyweight Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flyweight Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="flyweight-design-pattern">Flyweight Design Pattern</h1>
+            <p>
+                The Flyweight design pattern is a structural pattern that
+                focuses on optimizing memory usage by sharing a common state
+                among multiple objects. It aims to reduce the number of objects
+                created and to decrease memory footprint, particularly useful
+                when dealing with a large number of similar objects.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li>
+                    <a href="#components-of-flyweight-design-pattern"
+                        >Components of Flyweight Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-flyweight-design-pattern">
+                Components of Flyweight Design Pattern
+            </h2>
+            <p>
+                The Flyweight design pattern typically consists of the following
+                components:
+            </p>
+            <ol>
+                <li>
+                    <strong>Flyweight Interface/Class</strong>:
+                    <ul>
+                        <li>
+                            Defines the interface through which flyweight
+                            objects can receive and act on extrinsic state.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Concrete Flyweight Classes</strong>:
+                    <ul>
+                        <li>
+                            Implements the Flyweight interface and represents
+                            objects that can be shared.
+                        </li>
+                        <li>
+                            Stores intrinsic state (state that can be shared)
+                            and provides methods to manipulate intrinsic state
+                            if needed.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Flyweight Factory</strong>:
+                    <ul>
+                        <li>Manages a pool of flyweight objects.</li>
+                        <li>
+                            Provides methods for clients to retrieve or create
+                            flyweight objects.
+                        </li>
+                        <li>
+                            Ensures flyweight objects are shared appropriately
+                            to maximize reusability.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Client</strong>:
+                    <ul>
+                        <li>Uses flyweight objects to perform operations.</li>
+                        <li>
+                            Maintains or passes extrinsic state to flyweight
+                            objects when needed.
+                        </li>
+                        <li>
+                            Does not manage the lifecycle of flyweight objects
+                            directly but interacts with them via the factory.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="uml.png" alt="alt text" /></p>
+        </div>
+    </body>
 </html>
