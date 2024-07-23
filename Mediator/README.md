@@ -97,7 +97,7 @@ The Mediator design pattern is a behavioral pattern that defines an object, the 
 
     ```java
     // Main class
-    public class MediatorAirplaneExample {
+    public class Main {
         public static void main(String[] args) {
             // Instantiate the Mediator (Airport Control Tower)
             AirTrafficControlTower controlTower = new AirportControlTower();
