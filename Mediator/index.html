@@ -1,26 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediator Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mediator Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="mediator-design-pattern">Mediator Design Pattern</h1>
+            <p>
+                The Mediator design pattern is a behavioral pattern that defines
+                an object, the mediator, to centralize communication between
+                various components or objects in a system. This promotes loose
+                coupling by preventing direct interactions between components,
+                instead of having them communicate through the mediator,
+                facilitating better maintainability and flexibility in the
+                system architecture.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li>
+                    <a href="#components-of-the-mediator-design-pattern"
+                        >Components of the Mediator Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-the-mediator-design-pattern">
+                Components of the Mediator Design Pattern
+            </h2>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Mediator</strong>: The Mediator interface
+                        defines the communication contract, specifying methods
+                        that concrete mediators should implement to facilitate
+                        interactions among colleagues.. It encapsulates the
+                        logic for coordinating and managing the interactions
+                        between these objects, promoting loose coupling and
+                        centralizing control over their communication.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Colleague</strong>: Colleague classes are the
+                        components or objects that interact with each other.
+                        They communicate through the Mediator, and each
+                        colleague class is only aware of the mediator, not the
+                        other colleagues. This isolation ensures that changes in
+                        one colleague do not directly affect others.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Concrete Mediator</strong>: Concrete Mediator is
+                        a specific implementation of the Mediator interface. It
+                        coordinates the communication between concrete colleague
+                        objects, handling their interactions and ensuring a
+                        well-organized collaboration while keeping them
+                        decoupled.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Concrete colleague</strong>: Concrete Colleague
+                        classes are the specific implementations of the
+                        Colleague interface. They rely on the Mediator to
+                        communicate with other colleagues, avoiding direct
+                        dependencies and promoting a more flexible and
+                        maintainable system architecture.
+                    </p>
+                </li>
+            </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="uml.png" alt="uml" /></p>
+            <ol>
+                <li>
+                    <p><strong>Colleague Interface(Airplane)</strong></p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Colleague Interface</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Airplane</span> {
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">requestTakeoff</span>(<span class="hljs-params"></span>)</span>;
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">requestLanding</span>(<span class="hljs-params"></span>)</span>;
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">notifyAirTrafficControl</span>(<span class="hljs-params">String message</span>)</span>;
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong
+                            >ConcreteColleague Class(CommercialAirplane)</strong
+                        >
+                    </p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Concrete Colleague</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CommercialAirplane</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Airplane</span> </span>{
+     <span class="hljs-keyword">private</span> AirTrafficControlTower mediator;
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CommercialAirplane</span><span class="hljs-params">(AirTrafficControlTower mediator)</span> </span>{
+         <span class="hljs-keyword">this</span>.mediator = mediator;
+     }
+
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">requestTakeoff</span><span class="hljs-params">()</span> </span>{
+         mediator.requestTakeoff(<span class="hljs-keyword">this</span>);
+     }
+
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">requestLanding</span><span class="hljs-params">()</span> </span>{
+         mediator.requestLanding(<span class="hljs-keyword">this</span>);
+     }
+
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyAirTrafficControl</span><span class="hljs-params">(String message)</span> </span>{
+         System.out.println(<span class="hljs-string">"Commercial Airplane: "</span> + message);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong
+                            >Mediator Interface(AirTrafficControlTower)</strong
+                        >
+                    </p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Mediator Interface</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">AirTrafficControlTower</span> {
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">requestTakeoff</span>(<span class="hljs-params">Airplane airplane</span>)</span>;
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">requestLanding</span>(<span class="hljs-params">Airplane airplane</span>)</span>;
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p>
+                        <strong
+                            >ConcreteMediator Class(AirportControlTower)</strong
+                        >
+                    </p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Concrete Mediator</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AirportControlTower</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">AirTrafficControlTower</span> </span>{
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">requestTakeoff</span><span class="hljs-params">(Airplane airplane)</span> </span>{
+         <span class="hljs-comment">// Logic for coordinating takeoff</span>
+         airplane.notifyAirTrafficControl(<span class="hljs-string">"Requesting takeoff clearance."</span>);
+     }
+
+     <span class="hljs-meta">@Override</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">requestLanding</span><span class="hljs-params">(Airplane airplane)</span> </span>{
+         <span class="hljs-comment">// Logic for coordinating landing</span>
+         airplane.notifyAirTrafficControl(<span class="hljs-string">"Requesting landing clearance."</span>);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Main</strong></p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Main class</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MediatorAirplaneExample</span> </span>{
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) {
+         <span class="hljs-comment">// Instantiate the Mediator (Airport Control Tower)</span>
+         AirTrafficControlTower controlTower = <span class="hljs-keyword">new</span> <span class="hljs-type">AirportControlTower</span>();
+
+         <span class="hljs-comment">// Instantiate Concrete Colleagues (Commercial Airplanes)</span>
+         Airplane airplane1 = <span class="hljs-keyword">new</span> <span class="hljs-type">CommercialAirplane</span>(controlTower);
+         Airplane airplane2 = <span class="hljs-keyword">new</span> <span class="hljs-type">CommercialAirplane</span>(controlTower);
+
+         <span class="hljs-comment">// Set up the association between Concrete Colleagues and the Mediator</span>
+         airplane1.requestTakeoff();
+         airplane2.requestLanding();
+
+         <span class="hljs-comment">// Output:</span>
+         <span class="hljs-comment">// Commercial Airplane: Requesting takeoff clearance.</span>
+         <span class="hljs-comment">// Commercial Airplane: Requesting landing clearance.</span>
+     }
+ }
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </body>
 </html>
