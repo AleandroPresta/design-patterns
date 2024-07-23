@@ -103,6 +103,115 @@
             </ol>
             <h2 id="implementation">Implementation</h2>
             <p><img src="uml.png" alt="alt text" /></p>
+            <ol>
+                <li>
+                    <p><strong>Flyweight Interface</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Flyweight interface</span>
+ <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">Icon</span> {
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">draw</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y</span>)</span>;  <span class="hljs-comment">// Method to draw the icon at given coordinates</span>
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Concrete Flyweight Classes</strong></p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Concrete Flyweight class representing a File Icon</span>
+ <span class="hljs-keyword">public</span> class FileIcon implements Icon {
+     <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> type;  <span class="hljs-comment">// Intrinsic state: type of file icon (e.g., document, image)</span>
+     <span class="hljs-keyword">private</span> Image <span class="hljs-built_in">image</span>;  <span class="hljs-comment">// Intrinsic state: image specific to the file icon</span>
+
+     <span class="hljs-keyword">public</span> FileIcon(<span class="hljs-keyword">String</span> type, Image <span class="hljs-built_in">image</span>) {
+         <span class="hljs-keyword">this</span>.type = type;
+         <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span> = <span class="hljs-built_in">image</span>;
+     }
+
+     @Override
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span>(<span class="hljs-built_in">int</span> x, <span class="hljs-built_in">int</span> y) {
+         <span class="hljs-comment">// Draw logic specific to file icon using intrinsic state (image)</span>
+         System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Drawing "</span> + type + <span class="hljs-string">" icon at position ("</span> + x + <span class="hljs-string">", "</span> + y + <span class="hljs-string">")"</span>);
+     }
+ }
+
+ <span class="hljs-comment">// Concrete Flyweight class representing a Folder Icon</span>
+ <span class="hljs-keyword">public</span> class FolderIcon implements Icon {
+     <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> <span class="hljs-built_in">color</span>;  <span class="hljs-comment">// Intrinsic state: color of the folder icon</span>
+     <span class="hljs-keyword">private</span> Image <span class="hljs-built_in">image</span>;   <span class="hljs-comment">// Intrinsic state: image specific to the folder icon</span>
+
+     <span class="hljs-keyword">public</span> FolderIcon(<span class="hljs-keyword">String</span> <span class="hljs-built_in">color</span>, Image <span class="hljs-built_in">image</span>) {
+         <span class="hljs-keyword">this</span>.<span class="hljs-built_in">color</span> = <span class="hljs-built_in">color</span>;
+         <span class="hljs-keyword">this</span>.<span class="hljs-built_in">image</span> = <span class="hljs-built_in">image</span>;
+     }
+
+     @Override
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span>(<span class="hljs-built_in">int</span> x, <span class="hljs-built_in">int</span> y) {
+         <span class="hljs-comment">// Draw logic specific to folder icon using intrinsic state (image)</span>
+         System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Drawing folder icon with color "</span> + <span class="hljs-built_in">color</span> + <span class="hljs-string">" at position ("</span> + x + <span class="hljs-string">", "</span> + y + <span class="hljs-string">")"</span>);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Flyweight Factory</strong></p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">import</span> java.util.<span class="hljs-keyword">HashMap</span>;
+ <span class="hljs-keyword">import</span> java.util.Map;
+
+ <span class="hljs-comment">// Flyweight factory to manage creation and retrieval of flyweight objects</span>
+ <span class="hljs-keyword">public</span> class IconFactory {
+     <span class="hljs-keyword">private</span> Map&lt;<span class="hljs-keyword">String</span>, Icon&gt; iconCache = <span class="hljs-keyword">new</span> <span class="hljs-keyword">HashMap</span>&lt;&gt;();
+
+     <span class="hljs-keyword">public</span> Icon getIcon(<span class="hljs-keyword">String</span> <span class="hljs-built_in">key</span>) {
+         <span class="hljs-comment">// Check if the icon already exists in the cache</span>
+         <span class="hljs-keyword">if</span> (iconCache.containsKey(<span class="hljs-built_in">key</span>)) {
+             <span class="hljs-keyword">return</span> iconCache.<span class="hljs-built_in">get</span>(<span class="hljs-built_in">key</span>);
+         } <span class="hljs-keyword">else</span> {
+             <span class="hljs-comment">// Create a new icon based on the key (type of icon)</span>
+             Icon icon;
+             <span class="hljs-keyword">if</span> (<span class="hljs-built_in">key</span>.equals(<span class="hljs-string">"file"</span>)) {
+                 icon = <span class="hljs-keyword">new</span> FileIcon(<span class="hljs-string">"document"</span>, <span class="hljs-built_in">loadImage</span>(<span class="hljs-string">"document.png"</span>));
+             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">key</span>.equals(<span class="hljs-string">"folder"</span>)) {
+                 icon = <span class="hljs-keyword">new</span> FolderIcon(<span class="hljs-string">"blue"</span>, <span class="hljs-built_in">loadImage</span>(<span class="hljs-string">"folder.png"</span>));
+             } <span class="hljs-keyword">else</span> {
+                 <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Unsupported icon type: "</span> + <span class="hljs-built_in">key</span>);
+             }
+             <span class="hljs-comment">// Store the created icon in the cache</span>
+             iconCache.put(<span class="hljs-built_in">key</span>, icon);
+             <span class="hljs-keyword">return</span> icon;
+         }
+     }
+
+     <span class="hljs-comment">// Simulated method to load image based on filename</span>
+     <span class="hljs-keyword">private</span> Image <span class="hljs-built_in">loadImage</span>(<span class="hljs-keyword">String</span> filename) {
+         <span class="hljs-comment">// Load image from file system or resource</span>
+         <span class="hljs-comment">// Here, returning a dummy Image object</span>
+         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Image(filename);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Client</strong></p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Client code to use the flyweight objects (icons)</span>
+ <span class="hljs-keyword">public</span> class Client {
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span>[] args) {
+         IconFactory iconFactory = <span class="hljs-keyword">new</span> IconFactory();
+
+         <span class="hljs-comment">// Draw file icons at different positions</span>
+         Icon fileIcon1 = iconFactory.getIcon(<span class="hljs-string">"file"</span>);
+         fileIcon1.<span class="hljs-title">draw</span>(<span class="hljs-number">100</span>, <span class="hljs-number">100</span>);
+
+         Icon fileIcon2 = iconFactory.getIcon(<span class="hljs-string">"file"</span>);
+         fileIcon2.<span class="hljs-title">draw</span>(<span class="hljs-number">150</span>, <span class="hljs-number">150</span>);
+
+         <span class="hljs-comment">// Draw folder icons at different positions</span>
+         Icon folderIcon1 = iconFactory.getIcon(<span class="hljs-string">"folder"</span>);
+         folderIcon1.<span class="hljs-title">draw</span>(<span class="hljs-number">200</span>, <span class="hljs-number">200</span>);
+
+         Icon folderIcon2 = iconFactory.getIcon(<span class="hljs-string">"folder"</span>);
+         folderIcon2.<span class="hljs-title">draw</span>(<span class="hljs-number">250</span>, <span class="hljs-number">250</span>);
+     }
+ }
+</code></pre>
+                </li>
+            </ol>
         </div>
     </body>
 </html>
