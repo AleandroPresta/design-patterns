@@ -84,6 +84,98 @@
                     </p>
                 </li>
             </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="implementation.png" alt="implementation" /></p>
+            <ol>
+                <li>
+                    <p><strong>Originator (Document)</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Document {
+     <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> content;
+
+     <span class="hljs-keyword">public</span> Document(<span class="hljs-keyword">String</span> content) {
+         <span class="hljs-keyword">this</span>.content = content;
+     }
+
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-built_in">write</span>(<span class="hljs-keyword">String</span> <span class="hljs-built_in">text</span>) {
+         <span class="hljs-keyword">this</span>.content += <span class="hljs-built_in">text</span>;
+     }
+
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getContent() {
+         <span class="hljs-built_in">return</span> <span class="hljs-keyword">this</span>.content;
+     }
+
+     <span class="hljs-keyword">public</span> DocumentMemento createMemento() {
+         <span class="hljs-built_in">return</span> <span class="hljs-keyword">new</span> DocumentMemento(<span class="hljs-keyword">this</span>.content);
+     }
+
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> restoreFromMemento(DocumentMemento memento) {
+         <span class="hljs-keyword">this</span>.content = memento.getSavedContent();
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Memento</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DocumentMemento</span> </span>{
+     <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> content;
+
+     <span class="hljs-keyword">public</span> DocumentMemento(<span class="hljs-keyword">String</span> content) {
+         <span class="hljs-built_in">this</span>.content = content;
+     }
+
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getSavedContent() {
+         <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.content;
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Caretaker(History)</strong>:</p>
+                    <pre><code class="lang-java"> import java.util.ArrayList;
+ import java.util.List;
+
+ <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">History</span> {
+     <span class="hljs-keyword">private</span> List&lt;DocumentMemento&gt; mementos;
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">History</span>(<span class="hljs-params"></span>) </span>{
+         <span class="hljs-keyword">this</span>.mementos = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+     }
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addMemento</span>(<span class="hljs-params">DocumentMemento memento</span>) </span>{
+         <span class="hljs-keyword">this</span>.mementos.<span class="hljs-keyword">add</span>(memento);
+     }
+
+     <span class="hljs-function"><span class="hljs-keyword">public</span> DocumentMemento <span class="hljs-title">getMemento</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> index</span>) </span>{
+         <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.mementos.<span class="hljs-keyword">get</span>(index);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Client</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Main {
+     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> main(<span class="hljs-built_in">String</span>[] args) {
+         Document <span class="hljs-built_in">document</span> = <span class="hljs-keyword">new</span> Document(<span class="hljs-string">"Initial content\n"</span>);
+         History history = <span class="hljs-keyword">new</span> History();
+
+         <span class="hljs-comment">// Write some content</span>
+         <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"Additional content\n"</span>);
+         history.addMemento(<span class="hljs-built_in">document</span>.createMemento());
+
+         <span class="hljs-comment">// Write more content</span>
+         <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"More content\n"</span>);
+         history.addMemento(<span class="hljs-built_in">document</span>.createMemento());
+
+         <span class="hljs-comment">// Restore to previous state</span>
+         <span class="hljs-built_in">document</span>.restoreFromMemento(history.getMemento(<span class="hljs-number">1</span>));
+
+         <span class="hljs-comment">// Print document content</span>
+         System.out.println(<span class="hljs-built_in">document</span>.getContent());
+     }
+ }
+</code></pre>
+                </li>
+            </ol>
         </div>
     </body>
 </html>
