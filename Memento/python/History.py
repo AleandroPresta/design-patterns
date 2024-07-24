@@ -1,7 +1,15 @@
 from typing import List
 from Memento import Memento
+from abc import ABC
 
-class History:
+class Caretaker(ABC):
+    def add_memento(self, memento: Memento) -> None:
+        pass
+    
+    def get_memento(self, index: int) -> Memento:
+        pass
+
+class History(Caretaker):
     mementos: List[Memento] = []
     
     def __init__(self):
