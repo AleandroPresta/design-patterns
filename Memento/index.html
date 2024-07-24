@@ -1,26 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memento Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Memento Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="memento-design-pattern">Memento Design Pattern</h1>
+            <p>
+                The Memento design pattern is a behavioral design pattern used
+                to capture and restore the internal state of an object without
+                exposing its implementation details.
+            </p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li>
+                    <a href="#components-of-memento-design-pattern"
+                        >Components of Memento Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-memento-design-pattern">
+                Components of Memento Design Pattern
+            </h2>
+            <p><img src="uml.png" alt="uml" /></p>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Originator</strong>: This component is
+                        responsible for creating and managing the state of an
+                        object. It has methods to set and get the object’s
+                        state, and it can create Memento objects to store its
+                        state. The Originator communicates directly with the
+                        Memento to create snapshots of its state and to restore
+                        its state from a snapshot.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Memento</strong>: The Memento is an object that
+                        stores the state of the Originator at a particular point
+                        in time. It only provides a way to retrieve the state,
+                        without allowing direct modification. This ensures that
+                        the state remains
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Caretaker</strong>: The Caretaker is responsible
+                        for keeping track of Memento objects. It doesn’t know
+                        the details of the state stored in the Memento but can
+                        request Mementos from the Originator to save or restore
+                        the object’s state.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Client</strong>: Typically represented as the
+                        part of the application or system that interacts with
+                        the Originator and Caretaker to achieve specific
+                        functionality. The client initiates requests to save or
+                        restore the state of the Originator through the
+                        Caretaker.
+                    </p>
+                </li>
+            </ol>
+        </div>
+    </body>
 </html>
