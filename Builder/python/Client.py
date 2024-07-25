@@ -1,7 +1,5 @@
-from GamingComputerBuilder import GamingComputerBuilder
-from OfficeComputerBuilder import OfficeComputerBuilder
 from Director import Director
-from Builder import Builder
+from Builder import Builder, GamingComputerBuilder, OfficeComputerBuilder
 from Computer import Computer
 
 def main() -> None:

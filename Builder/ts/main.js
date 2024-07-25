@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Builder_1 = require("./Builder");
+const Director_1 = require("./Director");
+const gaming_computer_builder = new Builder_1.GamingComputerBuilder();
+const director = new Director_1.Director();
+director.construct(gaming_computer_builder);
+const gaming_computer = gaming_computer_builder.get_result();
+gaming_computer.display_info();
+const office_computer_builder = new Builder_1.OfficeComputerBuilder();
+director.construct(office_computer_builder);
+const office_computer = office_computer_builder.get_result();
+office_computer.display_info();
