@@ -108,7 +108,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 
 ![prototype](/Prototype/uml.png)
 
-## Proxy Pattern
+### Proxy Pattern
 
 ![proxy](/Proxy/uml.png)
 
