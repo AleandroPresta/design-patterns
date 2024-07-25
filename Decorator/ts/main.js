@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Coffee_1 = require("./Coffee");
+const CoffeeDecorator_1 = require("./CoffeeDecorator");
+const coffee = new Coffee_1.PlainCoffe();
+console.log(`Description: ${coffee.getDescription()}`);
+console.log(`Cost: ${coffee.getCost()}$`);
+const milkCoffee = new CoffeeDecorator_1.MilkDecorator(coffee);
+console.log(`Description: ${milkCoffee.getDescription()}`);
+console.log(`Cost: ${milkCoffee.getCost()}$`);
+const sugarCoffee = new CoffeeDecorator_1.SugarDecorator(coffee);
+console.log(`Description: ${sugarCoffee.getDescription()}`);
+console.log(`Cost: ${sugarCoffee.getCost()}$`);
