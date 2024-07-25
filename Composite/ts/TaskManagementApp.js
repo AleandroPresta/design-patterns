@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Task_1 = require("./Task");
+const simpleTask1 = new Task_1.SimpleTask("Complete Coding");
+const simpleTask2 = new Task_1.SimpleTask("Write Documentation");
+const projectTasks = new Task_1.TaskList("Project Tasks");
+projectTasks.addTask(simpleTask1);
+projectTasks.addTask(simpleTask2);
+const phase1Tasks = new Task_1.TaskList("Phase 1 Tasks");
+phase1Tasks.addTask(new Task_1.SimpleTask("Design Application"));
+phase1Tasks.addTask(new Task_1.SimpleTask("Develop Application"));
+projectTasks.addTask(phase1Tasks);
+projectTasks.display();

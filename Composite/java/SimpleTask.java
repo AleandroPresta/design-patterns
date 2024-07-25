@@ -9,7 +9,7 @@ public class SimpleTask implements Task {
  
     @Override
     public String getTitle() {
-        return title;
+        return this.title;
     }
  
     @Override

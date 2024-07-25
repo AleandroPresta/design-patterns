@@ -16,7 +16,7 @@ public class TaskList implements Task {
 
 	@Override
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	@Override
