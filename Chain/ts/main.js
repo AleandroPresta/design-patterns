@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Request_1 = require("./Request");
+const SupportHandler_1 = require("./SupportHandler");
+const level1Handler = new SupportHandler_1.Level1SupportHandler();
+const level2Handler = new SupportHandler_1.Level2SupportHandler();
+const level3Handler = new SupportHandler_1.Level3SupportHandler();
+level1Handler.setNextHandler(level2Handler);
+level2Handler.setNextHandler(level3Handler);
+const request1 = new Request_1.Request(Request_1.Priority.BASIC);
+const request2 = new Request_1.Request(Request_1.Priority.INTERMEDIATE);
+const request3 = new Request_1.Request(Request_1.Priority.CRITICAL);
+level1Handler.handleRequest(request1);
+level1Handler.handleRequest(request2);
+level1Handler.handleRequest(request3);

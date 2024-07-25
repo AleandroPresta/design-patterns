@@ -13,6 +13,6 @@ class Request {
     }
 
     public Priority getPriority() {
-        return priority;
+        return this.priority;
     }
 }
