@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const IconFactory_1 = require("./IconFactory");
+const iconFactory = new IconFactory_1.IconFactory();
+const icon1 = iconFactory.getIcon('file');
+icon1.draw(100, 100);
+const icon2 = iconFactory.getIcon('file');
+icon2.draw(200, 200);
+const icon3 = iconFactory.getIcon('folder');
+icon3.draw(300, 300);
+const icon4 = iconFactory.getIcon('folder');
+icon4.draw(400, 400);
