@@ -25,6 +25,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
     <li><a href="./Singleton">Singleton Pattern</a></li>
     <li><a href="/State/">State Pattern</a></li>
     <li><a href="./Strategy/">Strategy Pattern</a></li>
+    <li><a href="./Template/">Template Method Pattern</a></li>
     <li><a href="./Visitor/">Visitor Pattern</a></li>
 </ul>
 
@@ -50,6 +51,7 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 -   [Singleton Pattern](#singleton-pattern)
 -   [State Pattern](#state-pattern)
 -   [Strategy Pattern](#strategy-pattern)
+-   [Template Method Pattern](#template-method-pattern)
 -   [Visitor Pattern](#visitor-pattern)
 
 ### Adapter Pattern
@@ -123,6 +125,10 @@ For the website version <a href="https://aleandropresta.github.io/design-pattern
 ### Strategy Pattern
 
 ![strategy](/Strategy/images/uml.png)
+
+### Template Method Pattern
+
+![template](/Template/uml.png)
 
 ### Visitor Pattern
 
