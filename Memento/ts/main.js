@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Document_1 = require("./Document");
+const History_1 = require("./History");
+const document = new Document_1.DocumentClass("Initial content\n");
+const history = new History_1.HistoryClass();
+document.write("Some more content\n");
+history.addMemento(document.createMemento());
+document.write("Even more content\n");
+history.addMemento(document.createMemento());
+console.log(document.getContent());
+document.restoreFromMemento(history.getMemento(0));
+console.log(document.getContent());
