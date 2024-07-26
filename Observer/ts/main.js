@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const Subject_1 = require("./Subject");
+const Observer_1 = require("./Observer");
+const weatherStation = new Subject_1.WeatherStation();
+const phoneDisplay = new Observer_1.PhoneDisplay();
+const tvDisplay = new Observer_1.TVDisplay();
+weatherStation.addObserver(phoneDisplay);
+weatherStation.addObserver(tvDisplay);
+weatherStation.setWeather('sunny');
