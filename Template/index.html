@@ -1,26 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template Method Design Pattern</title>
-    <link rel="stylesheet" href="../styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Template Method Design Pattern</title>
+        <link rel="stylesheet" href="../styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="../">Design Patterns</a>
-            </div>
-            <ul class="navbar-nav">
-                <li><a href="../">Home</a></li>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a href="../">Design Patterns</a>
+                </div>
+                <ul class="navbar-nav">
+                    <li><a href="../">Home</a></li>
+                </ul>
+            </nav>
+            <h1 id="template-method-design-pattern">
+                Template Method Design Pattern
+            </h1>
+            <p>
+                The Template Method design pattern is a behavioral design
+                pattern that defines the skeleton of an algorithm in a
+                superclass but allows subclasses to override specific steps of
+                the algorithm without changing its structure.
+            </p>
+            <p><img src="uml.png" alt="alt text" /></p>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li>
+                    <a href="#components-of-template-method-design-pattern"
+                        >Components of Template Method Design Pattern</a
+                    >
+                </li>
+                <li><a href="#implementation">Implementation</a></li>
             </ul>
-        </nav>
-    </div>
-</body>
+            <h2 id="components-of-template-method-design-pattern">
+                Components of Template Method Design Pattern
+            </h2>
+            <ol>
+                <li>
+                    <p>
+                        <strong>Abstract Class (or Interface)</strong>: This is
+                        the superclass that defines the template method. It
+                        provides a skeleton for the algorithm, where certain
+                        steps are defined but others are left abstract or
+                        defined as hooks that subclasses can override. It may
+                        also include concrete methods that are common to all
+                        subclasses and are used within the template method.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Template Method</strong>: This is the method
+                        within the abstract class that defines the overall
+                        algorithm structure by calling various steps in a
+                        specific order. It’s often declared as final to prevent
+                        subclasses from changing the algorithm’s structure. The
+                        template method usually consists of a series of method
+                        calls (either abstract or concrete) that make up the
+                        algorithm’s steps.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Abstract (or Hook) Methods</strong>: These are
+                        methods declared within the abstract class but not
+                        implemented. They serve as placeholders for steps in the
+                        algorithm that should be implemented by subclasses.
+                        Subclasses must provide concrete implementations for
+                        these methods to complete the algorithm.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <strong>Concrete Subclasses</strong>: These are the
+                        subclasses that extend the abstract class and provide
+                        concrete implementations for the abstract methods
+                        defined in the superclass. Each subclass can override
+                        certain steps of the algorithm to customize the behavior
+                        without changing the overall structure.
+                    </p>
+                </li>
+            </ol>
+            <h2 id="implementation">Implementation</h2>
+            <p><img src="implementation.png" alt="alt text" /></p>
+            <ol>
+                <li>
+                    <p><strong>Abstract Class</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Abstract class defining the template method</span>
+ <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BeverageMaker</span> {
+     <span class="hljs-comment">// Template method defining the overall process</span>
+     <span class="hljs-function"><span class="hljs-keyword">public</span> final <span class="hljs-keyword">void</span> <span class="hljs-title">makeBeverage</span>(<span class="hljs-params"></span>) </span>{
+         boilWater();
+         brew();
+         pourInCup();
+         addCondiments();
+     }
+
+     <span class="hljs-comment">// Abstract methods to be implemented by subclasses</span>
+     <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">brew</span>(<span class="hljs-params"></span>)</span>;
+     <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addCondiments</span>(<span class="hljs-params"></span>)</span>;
+
+     <span class="hljs-comment">// Common methods</span>
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">boilWater</span>(<span class="hljs-params"></span>) </span>{
+         System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Boiling water"</span>);
+     }
+
+     <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pourInCup</span>(<span class="hljs-params"></span>) </span>{
+         System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Pouring into cup"</span>);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Concrete Class (TeaMaker)</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Concrete subclass for making tea</span>
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TeaMaker</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BeverageMaker</span> </span>{
+     <span class="hljs-comment">// Implementing abstract methods</span>
+     <span class="hljs-meta">@Override</span>
+     void brew() {
+         <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"Steeping the tea"</span>);
+     }
+
+     <span class="hljs-meta">@Override</span>
+     void addCondiments() {
+         <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"Adding lemon"</span>);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Concrete Class (CoffeeMaker)</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-comment">// Concrete subclass for making coffee</span>
+ <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CoffeeMaker</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BeverageMaker</span> </span>{
+     <span class="hljs-comment">// Implementing abstract methods</span>
+     <span class="hljs-meta">@Override</span>
+     void brew() {
+         <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"Dripping coffee through filter"</span>);
+     }
+
+     <span class="hljs-meta">@Override</span>
+     void addCondiments() {
+         <span class="hljs-type">System</span>.out.println(<span class="hljs-string">"Adding sugar and milk"</span>);
+     }
+ }
+</code></pre>
+                </li>
+                <li>
+                    <p><strong>Client</strong>:</p>
+                    <pre><code class="lang-java"> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> {
+     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] args</span>) </span>{
+         System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"Making tea:"</span>);
+         BeverageMaker teaMaker = <span class="hljs-keyword">new</span> TeaMaker();
+         teaMaker.makeBeverage();
+
+         System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">"\nMaking coffee:"</span>);
+         BeverageMaker coffeeMaker = <span class="hljs-keyword">new</span> CoffeeMaker();
+         coffeeMaker.makeBeverage();
+     }
+ }
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </body>
 </html>
