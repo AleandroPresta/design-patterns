@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const State_1 = require("./State");
+const VendingMachine_1 = require("./VendingMachine");
+const vendingMachine = new VendingMachine_1.VendingMachineContext();
+vendingMachine.setState(new State_1.ReadyState());
+vendingMachine.request();
+vendingMachine.setState(new State_1.ProductSelectedState());
+vendingMachine.request();
+vendingMachine.setState(new State_1.PaymentPendingState());
+vendingMachine.request();
+vendingMachine.setState(new State_1.OutOfStockState());
+vendingMachine.request();
